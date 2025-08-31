@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Typing Effect ---
     const typingElement = document.getElementById('typing-text');
-    const textToType = "TANISHK MANOJ MESTRY";
+    const textToType = "TANISHK MESTRY";
     let i = 0;
     function typeWriter() {
         if (i < textToType.length) {
