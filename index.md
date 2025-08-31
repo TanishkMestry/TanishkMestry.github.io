@@ -172,10 +172,10 @@ layout: default
   </section>
 
   <section id="projects" class="slide">
-    <div class="carousel hidden" id="projects-carousel">
-        <div class="carousel-viewport"><div class="carousel-track"></div></div>
-        <button class="carousel-button carousel-button--left"><i class='bx bx-chevron-left'></i></button>
-        <button class="carousel-button carousel-button--right"><i class='bx bx-chevron-right'></i></button>
+  <div class="carousel hidden" id="projects-carousel">
+      <div class="carousel-viewport"><div class="carousel-track"></div></div>
+      <button class="carousel-button carousel-button--left"><i class='bx bx-chevron-left'></i></button>
+      <button class="carousel-button carousel-button--right"><i class='bx bx-chevron-right'></i></button>
     </div>
   </section>
 
