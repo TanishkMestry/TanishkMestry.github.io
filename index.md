@@ -181,6 +181,13 @@ title: Tanishk Manoj Mestry - Portfolio
   </section>
 
   <section id="certifications" class="slide">
+    <div class="content-wrapper">
+        <h2 class="section-title hidden">Projects</h2>
+    </div>
+    <div class="carousel hidden" id="projects-carousel">
+        ...
+    </div>
+</section>
     <div class="content-wrapper"><h2 class="section-title hidden">Certifications</h2></div>
     <div class="marquee hidden">
         <div class="marquee-track">
