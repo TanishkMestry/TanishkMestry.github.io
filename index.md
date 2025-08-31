@@ -39,11 +39,9 @@ title: Tanishk Manoj Mestry - Portfolio
     transition: background-color 0.3s, color 0.3s;
   }
   
-  /* NEW: This class centers content INSIDE full-width sections */
+  /* CORRECTED: This wrapper now only provides side padding. No max-width. */
   .content-wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 2rem; /* Side padding for content on smaller screens */
+      padding: 0 2rem; /* Keeps content from touching the absolute screen edges */
   }
 
   /* --- Header --- */
@@ -102,6 +100,7 @@ title: Tanishk Manoj Mestry - Portfolio
   /* --- Skills Grid --- */
   .skills-grid {
     display: grid;
+    /* This will create as many columns as can fit, filling the space */
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1.5rem;
   }
