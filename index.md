@@ -222,18 +222,18 @@
     </div>
   </section>
 
-  <section id="education" class="slide">
-    <div class="content-wrapper">
-        <h2 class="section-title hidden">Education</h2>
-        <div class="hidden">
-            <h3>SVKM's Mithibai College (Expected: April 2026)</h3>
-            <p>B.Sc. in Applied Statistics & Data Analytics</p>
-            <h3 style="margin-top: 2rem;">ITVEDANT (Jan 2025)</h3>
-            <p>Master in Data Science & Analytics with Artificial Intelligence</p>
-        </div>
+ <section id="education" class="slide">
+  <div class="content-wrapper" style="padding: 3rem;">
+    <h2 class="section-title hidden" style="font-size: 3rem;">Education</h2>
+    <div class="hidden">
+      <h3 style="font-size: 2rem; margin-top: 2rem;">SVKM's Mithibai College (Expected: April 2026)</h3>
+      <p style="font-size: 1.5rem; line-height: 2rem;">B.Sc. in Applied Statistics & Data Analytics</p>
+
+      <h3 style="font-size: 2rem; margin-top: 3rem;">ITVEDANT (Jan 2025)</h3>
+      <p style="font-size: 1.5rem; line-height: 2rem;">Master in Data Science & Analytics with Artificial Intelligence</p>
     </div>
-  </section>
-</main>
+  </div>
+</section>
 
 <div id="youtube-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('youtube-modal')">&times;</span><h2>Global YouTube Statistics</h2><img src="images/placeholder.png" alt="YouTube Project Screenshot"><p>Here you can add a more detailed description of the project.</p></div></div>
 <div id="sales-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('sales-modal')">&times;</span><h2>Product Sales Analysis</h2><img src="images/placeholder.png" alt="Sales Project Screenshot"></div></div>
