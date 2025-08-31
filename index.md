@@ -48,7 +48,6 @@ title: Tanishk Manoj Mestry - Portfolio
     opacity: 0.2;
     transition: transform 0.1s ease-out;
   }
-  body.light-theme .cursor-spotlight { opacity: 0.4; }
 
   .main-header {
     position: fixed;
@@ -68,8 +67,15 @@ title: Tanishk Manoj Mestry - Portfolio
     filter: grayscale(1) brightness(0.8) contrast(5) invert(1);
   }
 
-  .content-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  /* CORRECTED: Wrapper is now full-width */
+  .content-wrapper {
+    width: 100%;
+    padding: 0 4rem; /* Side padding to prevent content touching screen edges */
+    box-sizing: border-box;
+  }
+
   .section { padding: 8rem 0; border-bottom: 1px solid var(--border-color); }
+  .section:last-child { border-bottom: none; }
   .section-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 4rem; text-align: center; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   
   #welcome {
@@ -81,46 +87,42 @@ title: Tanishk Manoj Mestry - Portfolio
   #welcome h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); margin: 0; line-height: 1.1; white-space: nowrap; }
   #welcome .typing-effect { border-right: 4px solid var(--text-color); animation: blink-caret .75s step-end infinite; padding-right: 2px; }
   @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--text-color); } }
-  #welcome h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 300; margin: 1.5rem 0 2.5rem 0; max-width: 600px; color: var(--text-muted); }
+  #welcome h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 300; margin: 1.5rem 0 2.5rem 0; color: var(--text-muted); }
   #welcome .social-links a { font-size: 2rem; margin-right: 1.5rem; color: var(--text-muted); transition: color 0.3s; }
-  #welcome .social-links a:hover { color: var(--color-2); }
   
   .skills-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem 3rem; }
   .skill-item { text-align: center; transition: transform 0.3s ease; }
-  .skill-item:hover { transform: scale(1.1); }
   .skill-item .skill-icon { height: 60px; width: 60px; margin-bottom: 1rem; }
-  .skill-item span { font-weight: bold; }
-
+  
   .carousel { position: relative; padding: 2rem 0; }
-  .carousel-viewport { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent); mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent); }
+  .carousel-viewport { overflow: hidden; }
   .carousel-track { display: flex; }
-  .carousel-slide { min-width: 50%; margin: 0 2%; box-sizing: border-box; transition: transform 0.5s, opacity 0.5s; opacity: 0.4; transform: scale(0.8); cursor: pointer; }
+  .carousel-slide { min-width: 33.33%; padding: 0 1rem; box-sizing: border-box; transition: transform 0.5s, opacity 0.5s; opacity: 0.4; transform: scale(0.9); cursor: pointer; }
   .carousel-slide.is-selected { opacity: 1; transform: scale(1); }
   .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(128,128,128,0.2); border: 1px solid var(--border-color); color: var(--text-color); border-radius: 50%; width: 50px; height: 50px; cursor: pointer; z-index: 10; font-size: 24px; display: flex; align-items: center; justify-content: center; }
-  .carousel-button:hover { background: rgba(128,128,128,0.4); }
-  .carousel-button--left { left: 0; }
-  .carousel-button--right { right: 0; }
+  .carousel-button--left { left: 2rem; }
+  .carousel-button--right { right: 2rem; }
   
   .project-slide { position: relative; border-radius: 16px; overflow: hidden; min-height: 450px; background-size: cover; background-position: center; color: #fff; }
   .project-slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%); }
   .project-content { position: absolute; bottom: 0; left: 0; padding: 2rem; z-index: 2; }
-  .project-content h3 { margin: 0 0 0.5rem 0; font-size: 1.8rem; }
   
   #certifications.section { padding: 8rem 0; width: 100%; }
-  .marquee { width: 100vw; max-width: 100%; overflow: hidden; position: relative; }
+  .marquee { width: 100vw; max-width: 100%; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); }
   .marquee-track { display: flex; width: fit-content; animation: marquee 40s linear infinite; }
   .marquee:hover .marquee-track { animation-play-state: paused; }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .cert-item { flex-shrink: 0; width: 300px; padding: 2rem; text-align: center; cursor: pointer; transition: transform 0.3s ease; }
-  .cert-item:hover { transform: scale(1.1); }
   .cert-item i { font-size: 60px; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   
-  .hidden { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-  .show { opacity: 1; transform: translateY(0); }
+  .timeline-item { text-align: left; margin-bottom: 2rem; }
+  .timeline-item h3 { font-size: 1.2rem; margin: 0; }
+  .timeline-item p { margin: 0.25rem 0 0 0; color: var(--text-muted); }
+
+  .hidden { opacity: 0; transition: opacity 1s ease-out; }
+  .show { opacity: 1; }
   .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
   .modal-content { background-color: var(--bg-color); border: 1px solid var(--border-color); margin: 5% auto; padding: 2rem; width: 80%; max-width: 900px; position: relative; border-radius: 8px; }
-  .modal-content img { width: 100%; }
-  .close-button { color: #aaaaaa; position: absolute; top: 1rem; right: 1.5rem; font-size: 2.5rem; font-weight: bold; cursor: pointer; }
 </style>
 
 <div class="cursor-spotlight"></div>
@@ -191,7 +193,7 @@ title: Tanishk Manoj Mestry - Portfolio
   <section id="experience" class="section">
     <div class="content-wrapper">
         <h2 class="section-title hidden">Work Experience</h2>
-        <div class="hidden">
+        <div class="timeline-item hidden">
             <h3>Bhoir & Patil Associates, Tax Consultants <span style="color: var(--text-muted);">(Apr 2024 - Mar 2025)</span></h3>
             <p><strong>Accounts Assistant:</strong> Managed and entered client financial data, including balance sheets, purchase and sales records, using Tally. Prepared and analysed financial statements and maintained detailed creditor and debtor records in Excel. Ensured tax compliance by generating accurate reports through GST software.</p>
         </div>
@@ -201,9 +203,11 @@ title: Tanishk Manoj Mestry - Portfolio
   <section id="education" class="section">
     <div class="content-wrapper">
         <h2 class="section-title hidden">Education</h2>
-        <div class="hidden">
+        <div class="timeline-item hidden">
             <h3>SVKM's Mithibai College <span style="color: var(--text-muted);">(Expected: April 2026)</span></h3>
             <p>B.Sc. in Applied Statistics & Data Analytics</p>
+        </div>
+        <div class="timeline-item hidden">
             <h3 style="margin-top: 2rem;">ITVEDANT <span style="color: var(--text-muted);">(Jan 2025)</span></h3>
             <p>Master in Data Science & Analytics with Artificial Intelligence</p>
         </div>
@@ -211,7 +215,7 @@ title: Tanishk Manoj Mestry - Portfolio
   </section>
 </main>
 
-<div id="youtube-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('youtube-modal')">&times;</span><h2>Global YouTube Statistics</h2><img src="images/placeholder.png" alt="YouTube Project Screenshot"><p>Here you can add a more detailed description of the project.</p></div></div>
+<div id="youtube-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('youtube-modal')">&times;</span><h2>Global YouTube Statistics</h2><img src="images/placeholder.png" alt="YouTube Project Screenshot"></div></div>
 <div id="sales-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('sales-modal')">&times;</span><h2>Product Sales Analysis</h2><img src="images/placeholder.png" alt="Sales Project Screenshot"></div></div>
 <div id="game-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('game-modal')">&times;</span><h2>Video Game Sales Analysis</h2><img src="images/placeholder.png" alt="Game Project Screenshot"></div></div>
 <div id="library-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('library-modal')">&times;</span><h2>Library Management System</h2><img src="images/placeholder.png" alt="Library Project Screenshot"></div></div>
@@ -255,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(typeWriter, 120);
         }
     }
-    setTimeout(typeWriter, 500);
+    if(typingElement) setTimeout(typeWriter, 500);
 
     // --- Scroll Animations ---
     const observer = new IntersectionObserver((entries) => {
