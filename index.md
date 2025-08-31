@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tanishk Manoj Mestry - Portfolio
+title: Tanishk Mestry - Portfolio
 ---
 
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Typing Effect ---
     const typingElement = document.getElementById('typing-text');
-    const textToType = "TANISHK MANOJ MESTRY";
+    const textToType = "TANISHK MESTRY";
     let i = 0;
     function typeWriter() {
         if (!typingElement) return;
