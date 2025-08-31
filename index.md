@@ -1,380 +1,576 @@
----
-layout: default
-title: Tanishk Manoj Mestry - Portfolio
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanishk Mestry - Portfolio</title>
+    <style>
+        body { margin: 0; overflow: hidden; font-family: 'Inter', sans-serif; background-color: #f0f0f0; color: #333; }
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+        .sk-cube-grid {
+            width: 40px;
+            height: 40px;
+            margin: 100px auto;
+        }
 
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        .sk-cube-grid .sk-cube {
+            width: 33%;
+            height: 33%;
+            background-color: #333;
+            float: left;
+            -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+                    animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; 
+        }
+        .sk-cube-grid .sk-cube1 { -webkit-animation-delay: 0.2s; animation-delay: 0.2s; }
+        .sk-cube-grid .sk-cube2 { -webkit-animation-delay: 0.3s; animation-delay: 0.3s; }
+        .sk-cube-grid .sk-cube3 { -webkit-animation-delay: 0.4s; animation-delay: 0.4s; }
+        .sk-cube-grid .sk-cube4 { -webkit-animation-delay: 0.1s; animation-delay: 0.1s; }
+        .sk-cube-grid .sk-cube5 { -webkit-animation-delay: 0.2s; animation-delay: 0.2s; }
+        .sk-cube-grid .sk-cube6 { -webkit-animation-delay: 0.3s; animation-delay: 0.3s; }
+        .sk-cube-grid .sk-cube7 { -webkit-animation-delay: 0s; animation-delay: 0s; }
+        .sk-cube-grid .sk-cube8 { -webkit-animation-delay: 0.1s; animation-delay: 0.1s; }
+        .sk-cube-grid .sk-cube9 { -webkit-animation-delay: 0.2s; animation-delay: 0.2s; }
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
+        @-webkit-keyframes sk-cubeGridScaleDelay {
+            0%, 70%, 100% { -webkit-transform: scale3D(1, 1, 1); transform: scale3D(1, 1, 1); }
+            35% { -webkit-transform: scale3D(0, 0, 1); transform: scale3D(0, 0, 1); }
+        }
 
-  :root {
-    --color-1: #d33a3a;
-    --color-2: #8a2be2;
-    --color-3: #26abe7;
-    --color-4: #f5bc00;
-    --bg-color: #101015;
-    --text-color: #f0f0f0;
-    --text-muted: #a0a0a0;
-    --border-color: rgba(255, 255, 255, 0.1);
-    --primary-gradient: linear-gradient(90deg, var(--color-1), var(--color-2), var(--color-3));
-  }
-  body.light-theme {
-    --bg-color: #f5f5fa;
-    --text-color: #1c1c1c;
-    --text-muted: #555;
-    --border-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Roboto Mono', monospace;
-    margin: 0; padding: 0;
-    transition: background-color 0.5s, color 0.5s;
-    overflow-x: hidden;
-  }
+        @keyframes sk-cubeGridScaleDelay {
+            0%, 70%, 100% { -webkit-transform: scale3D(1, 1, 1); transform: scale3D(1, 1, 1); }
+            35% { -webkit-transform: scale3D(0, 0, 1); transform: scale3D(0, 0, 1); }
+        }
+        #content-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+        .content-box {
+            background: white;
+            padding: 2em;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .content-box h2 { margin-top: 0; }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .project-details { display: none; }
+        
+        /* Gemini Features Styling */
+        .gemini-btn {
+            background-color: #4a4af5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .gemini-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .gemini-btn:hover:not(:disabled) { background-color: #3a3ad5; }
+        .gemini-response {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
 
-  .cursor-spotlight {
-    position: fixed;
-    top: 0; left: 0;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, var(--color-2) 0%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: -1;
-    filter: blur(100px);
-    opacity: 0.2;
-    transition: transform 0.1s ease-out;
-  }
-  body.light-theme .cursor-spotlight { opacity: 0.4; }
+        #chat-window {
+            height: 40vh;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-message {
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 70%;
+        }
+        .user-message {
+            background-color: #4a4af5;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+        .bot-message {
+            background-color: #e9e9eb;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+        #chat-input-container { display: flex; }
+        #chat-input {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px 0 0 5px;
+        }
+        #chat-send {
+            padding: 10px 15px;
+            border: none;
+            background-color: #4a4af5;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        .spinner {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-  .main-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    padding: 1.5rem 2rem;
-    z-index: 1000;
-  }
-  .theme-switch { display: inline-block; cursor: pointer; }
-  .theme-switch input { display:none; }
-  .toggle-icon-svg {
-    width: 32px; height: 32px;
-    transition: transform 0.4s ease, filter 0.4s ease;
-  }
-  body:not(.light-theme) .toggle-icon-svg {
-    transform: rotate(-90deg);
-    filter: grayscale(1) brightness(0.8) contrast(5) invert(1);
-  }
-
-  .content-wrapper {
-    width: 100%;
-    padding: 0 4rem; /* Side padding to prevent content touching screen edges */
-    box-sizing: border-box;
-  }
-
-  .section { padding: 8rem 0; }
-  .section-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 4rem; text-align: center; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  
-  #welcome {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-bottom: 1px solid var(--border-color);
-  }
-  #welcome h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); margin: 0; line-height: 1.1; white-space: nowrap; }
-  #welcome .typing-effect { border-right: 4px solid var(--text-color); animation: blink-caret .75s step-end infinite; padding-right: 2px; }
-  @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--text-color); } }
-  #welcome h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 300; margin: 1.5rem 0 2.5rem 0; max-width: 800px; color: var(--text-muted); }
-  #welcome .social-links a { font-size: 2rem; margin-right: 1.5rem; color: var(--text-muted); transition: color 0.3s; }
-  
-  .skills-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem 3rem; }
-  .skill-item { text-align: center; transition: transform 0.3s ease; }
-  .skill-item:hover { transform: scale(1.1); }
-  .skill-item .skill-icon { height: 60px; width: 60px; margin-bottom: 1rem; }
-  .skill-item span { font-weight: bold; }
-
-  /* --- Seamless Carousels & Marquees --- */
-  .carousel { position: relative; padding: 2rem 0; }
-  .carousel-viewport { overflow: hidden; }
-  .carousel-track { display: flex; transition: transform 0.5s ease; }
-  .carousel-slide { min-width: 45%; margin: 0 1%; box-sizing: border-box; transition: transform 0.5s, opacity 0.5s; opacity: 0.4; transform: scale(0.85); cursor: pointer; }
-  .carousel-slide.is-selected { opacity: 1; transform: scale(1); }
-  .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(128,128,128,0.2); border: 1px solid var(--border-color); color: var(--text-color); border-radius: 50%; width: 50px; height: 50px; cursor: pointer; z-index: 10; font-size: 24px; display: flex; align-items: center; justify-content: center; }
-  .carousel-button--left { left: 2rem; }
-  .carousel-button--right { right: 2rem; }
-  
-  .project-slide { position: relative; border-radius: 16px; overflow: hidden; min-height: 450px; background-size: cover; background-position: center; color: #fff; }
-  .project-slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%); }
-  .project-content { position: absolute; bottom: 0; left: 0; padding: 2rem; z-index: 2; }
-  
-  #certifications.section { padding: 8rem 0; width: 100%; }
-  .marquee { width: 100vw; max-width: 100%; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); }
-  .marquee-track { display: flex; width: fit-content; animation: marquee 40s linear infinite; }
-  .marquee:hover .marquee-track { animation-play-state: paused; }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .cert-item { flex-shrink: 0; width: 300px; padding: 2rem; text-align: center; cursor: pointer; transition: transform 0.3s ease; }
-  .cert-item:hover { transform: scale(1.1); }
-  .cert-item i { font-size: 60px; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  
-  .timeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; text-align: left; }
-  .timeline-column h3 { font-size: 1.5rem; color: var(--text-muted); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
-  .timeline-item { margin-bottom: 2rem; }
-  .timeline-item h4 { font-size: 1.1rem; margin: 0; }
-  .timeline-item p { margin: 0.25rem 0 0 0; color: var(--text-muted); }
-  
-  .hidden { opacity: 0; transition: opacity 1s ease-out, transform 0.6s ease-out; transform: translateY(30px); }
-  .show { opacity: 1; transform: translateY(0); }
-  
-  .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
-  .modal-content { background-color: var(--bg-color); border: 1px solid var(--border-color); margin: 5% auto; padding: 2rem; width: 80%; max-width: 900px; position: relative; border-radius: 8px; }
-  .modal-content img { width: 100%; }
-  .close-button { color: #aaaaaa; position: absolute; top: 1rem; right: 1.5rem; font-size: 2.5rem; font-weight: bold; cursor: pointer; }
-
-  @media (max-width: 768px) {
-    .content-wrapper { padding: 0 1rem; }
-    .timeline-grid { grid-template-columns: 1fr; }
-  }
-</style>
-
-<div class="cursor-spotlight"></div>
-
-<header class="main-header">
-  <label class="theme-switch" for="checkbox">
-    <input type="checkbox" id="checkbox" />
-    <svg class="toggle-icon-svg" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48">
-      <rect width="8.1" height="4" x="31.3" y="10.7" fill="#f5bc00" transform="rotate(-45.001 35.315 12.655)"></rect><rect width="4" height="8.1" x="22" y="3.9" fill="#f5bc00"></rect><rect width="8.1" height="4" x="36" y="22" fill="#f5bc00"></rect><rect width="4" height="8.1" x="33.3" y="31.2" fill="#f5bc00" transform="rotate(-45.001 35.315 35.283)"></rect><rect width="4" height="8.1" x="22" y="35.9" fill="#f5bc00"></rect><rect width="8.1" height="4" x="8.7" y="33.3" fill="#f5bc00" transform="rotate(-45.001 12.686 35.283)"></rect><rect width="8.1" height="4" x="4" y="22" fill="#f5bc00"></rect><rect width="4" height="8.1" x="10.7" y="8.6" fill="#f5bc00" transform="rotate(-45.001 12.686 12.655)"></rect><circle cx="24" cy="24" r="15" fill="#f5bc00"></circle><path fill="#eb7900" d="M36,26h2.9c0.1-0.6,0.1-1.3,0.1-2c0-0.7-0.1-1.4-0.2-2H36V26z"></path><path fill="#eb7900" d="M33.1,12.1l-2,2l2.8,2.8l2-2C35.1,13.8,34.1,12.9,33.1,12.1z"></path><path fill="#eb7900" d="M26,9.1C25.3,9.1,24.7,9,24,9s-1.3,0.1-2,0.1V12h4V9.1z"></path><path fill="#eb7900" d="M33.9,31L31,33.8l2.1,2.1c1.1-0.8,2-1.8,2.8-2.8L33.9,31z"></path><path fill="#eb7900" d="M22,38.9c0.7,0.1,1.3,0.1,2,0.1s1.3-0.1,2-0.1v-2.9h-4V38.9z"></path><path fill="#eb7900" d="M12.1,33.1c0.8,1.1,1.8,2,2.8,2.8l2.1-2.1L14.1,31L12.1,33.1z"></path><path fill="#eb7900" d="M9.1,26H12v-4H9.2C9.1,22.6,9,23.3,9,24C9,24.7,9.1,25.3,9.1,26z"></path><path fill="#eb7900" d="M12.1,14.9l2,2l2.8-2.8l-2-2C13.9,12.9,12.9,13.8,12.1,14.9z"></path>
-    </svg>
-  </label>
-</header>
-
-<main>
-  <section id="welcome" class="section">
-    <div class="content-wrapper">
-      <h1 class="typing-effect hidden" id="typing-text"></h1>
-      <h3 class="hidden">Applied Statistics and Data Analytics student with strong skills in data analysis, statistical modelling, and visualization.</h3>
-      <div class="social-links hidden">
-        <a href="mailto:tanishkmestry4183@gmail.com" target="_blank" title="Email"><i class='bx bx-envelope'></i></a>
-        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_URL" target="_blank" title="LinkedIn"><i class='bx bxl-linkedin-square'></i></a>
-        <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
-      </div>
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <div class="sk-cube-grid">
+            <div class="sk-cube sk-cube1"></div><div class="sk-cube sk-cube2"></div><div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div><div class="sk-cube sk-cube5"></div><div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div><div class="sk-cube sk-cube8"></div><div class="sk-cube sk-cube9"></div>
+        </div>
+        <p>Loading Portfolio...</p>
     </div>
-  </section>
 
-  <section id="skills" class="section">
-    <div class="content-wrapper">
-      <h2 class="section-title hidden">Technical Skills</h2>
-      <div class="skills-container hidden">
-        <div class="skill-item"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48"><linearGradient id="python-gr1" x1="10.458" x2="26.314" y1="12.972" y2="26.277" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#26abe7"></stop><stop offset="1" stop-color="#086dbf"></stop></linearGradient><path fill="url(#python-gr1)" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2 H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104 c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672 C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498 c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><linearGradient id="python-gr2" x1="35.334" x2="23.517" y1="37.911" y2="21.034" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#feb705"></stop><stop offset="1" stop-color="#ffda1c"></stop></linearGradient><path fill="url(#python-gr2)" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549-2.077,4.549-4.67V34h-9v-2 h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826,3.417-0.863,5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104 c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5,4.377v8.586c0,2.439,1.759,4.263,4.218,4.672 C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5,1.498 c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path></svg><span>Python</span></div>
-        <div class="skill-item"><i class='bx bx-data skill-icon'></i><span>SQL</span></div>
-        <div class="skill-item"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48"><linearGradient id="powerbi-gr1" x1="32" x2="32" y1="3.947" y2="44.751" gradientUnits="userSpaceOnUse"><stop offset=".006" stop-color="#ebb112"></stop><stop offset="1" stop-color="#bb5c17"></stop></linearGradient><path fill="url(#powerbi-gr1)" d="M27,44h10c1.105,0,2-0.895,2-2V6c0-1.105-0.895-2-2-2H27c-1.105,0-2,0.895-2,2v36 C25,43.105,25.895,44,27,44z"></path><linearGradient id="powerbi-gr2" x1="22.089" x2="26.009" y1="13.14" y2="45.672" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fed35d"></stop><stop offset=".281" stop-color="#f6c648"></stop><stop offset=".857" stop-color="#e3a513"></stop><stop offset=".989" stop-color="#de9d06"></stop></linearGradient><path fill="url(#powerbi-gr2)" d="M19,44h10c1.105,0,2-0.895,2-2V16c0-1.105-0.895-2-2-2H19c-1.105,0-2,0.895-2,2v26 C17,43.105,17.895,44,19,44z"></path><linearGradient id="powerbi-gr3" x1="9.803" x2="21.335" y1="22.781" y2="43.658" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset=".983" stop-color="#ffdf26"></stop></linearGradient><path fill="url(#powerbi-gr3)" d="M11,44h10c1.105,0,2-0.895,2-2V26c0-1.105-0.895-2-2-2H11c-1.105,0-2,0.895-2,2v16 C9,43.105,9.895,44,11,44z"></path></svg><span>Power BI</span></div>
-        <div class="skill-item"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48"><rect width="1.5" height="9" x="22.75" y="1" fill="#78909c"></rect><rect width="9" height="1.5" x="19" y="4.75" fill="#78909c"></rect><rect width="1.5" height="9" x="40.75" y="19" fill="#5c6bc0"></rect><rect width="9" height="1.5" x="37" y="22.75" fill="#5c6bc0"></rect><rect width="1.5" height="9" x="4.75" y="19" fill="#78909c"></rect><rect width="9" height="1.5" x="1" y="22.75" fill="#78909c"></rect><rect width="1.5" height="9" x="22.75" y="37" fill="#5c6bc0"></rect><rect width="9" height="1.5" x="19" y="40.75" fill="#5c6bc0"></rect><rect width="17" height="3" x="15" y="22" fill="#e8762d"></rect><rect width="3" height="17" x="22" y="15" fill="#e8762d"></rect><rect width="2" height="14" x="11" y="6" fill="#ffa000"></rect><rect width="14" height="2" x="5" y="12" fill="#ffa000"></rect><rect width="2" height="14" x="34" y="6" fill="#607d8b"></rect><rect width="14" height="2" x="28" y="12" fill="#607d8b"></rect><rect width="2" height="14" x="11" y="27" fill="#c62828"></rect><rect width="14" height="2" x="5" y="33" fill="#c62828"></rect><rect width="2" height="14" x="34" y="27" fill="#0d47a1"></rect><rect width="14" height="2" x="28" y="33" fill="#0d47a1"></rect></svg><span>Tableau</span></div>
-        <div class="skill-item"><i class='bx bx-math skill-icon'></i><span>R</span></div>
-        <div class="skill-item"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48"><path fill="#169154" d="M29,6H15.744C14.781,6,14,6.781,14,7.744v7.259h15V6z"></path><path fill="#18482a" d="M14,33.054v7.202C14,41.219,14.781,42,15.743,42H29v-8.946H14z"></path><path fill="#0c8045" d="M14 15.003H29V24.005000000000003H14z"></path><path fill="#17472a" d="M14 24.005H29V33.055H14z"></path><g><path fill="#29c27f" d="M42.256,6H29v9.003h15V7.744C44,6.781,43.219,6,42.256,6z"></path><path fill="#27663f" d="M29,33.054V42h13.257C43.219,42,44,41.219,44,40.257v-7.202H29z"></path><path fill="#19ac65" d="M29 15.003H44V24.005000000000003H29z"></path><path fill="#129652" d="M29 24.005H44V33.055H29z"></path></g><path fill="#0c7238" d="M22.319,34H5.681C4.753,34,4,33.247,4,32.319V15.681C4,14.753,4.753,14,5.681,14h16.638 C23.247,14,24,14.753,24,15.681v16.638C24,33.247,23.247,34,22.319,34z"></path><path fill="#fff" d="M9.807 19L12.193 19 14.129 22.754 16.175 19 18.404 19 15.333 24 18.474 29 16.123 29 14.013 25.07 11.912 29 9.526 29 12.719 23.982z"></path></svg><span>Advanced Excel</span></div>
-        <div class="skill-item"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48"><linearGradient id="matlab-gr1" x1="22.645" x2="26.757" y1="10.881" y2="23.854" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#4adddf"></stop><stop offset=".699" stop-color="#3f5352"></stop><stop offset=".863" stop-color="#442729"></stop></linearGradient><path fill="url(#matlab-gr1)" d="M21,27l-7-6c0,0,1-1.5,2.5-3s2.736-1.852,4.5-3c3.511-2.284,6.5-12,11-12L21,27z"></path><linearGradient id="matlab-gr2" x1="1" x2="37.775" y1="27.033" y2="27.033" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#4adddf"></stop><stop offset=".792" stop-color="#3f5352"></stop><stop offset="1" stop-color="#442729"></stop></linearGradient><polygon fill="url(#matlab-gr2)" points="11,33.066 1,26 14,21 21.277,26.465 14,32.066"></polygon><linearGradient id="matlab-gr3" x1="11" x2="47" y1="24" y2="24" gradientUnits="userSpaceOnUse"><stop offset=".206" stop-color="#53140f"></stop><stop offset=".3" stop-color="#84360f"></stop><stop offset=".413" stop-color="#b85b10"></stop><stop offset=".511" stop-color="#df7610"></stop><stop offset=".59" stop-color="#f68710"></stop><stop offset=".639" stop-color="#ff8d10"></stop><stop offset=".729" stop-color="#fd8a10"></stop><stop offset=".8" stop-color="#f58010"></stop><stop offset=".865" stop-color="#e86f10"></stop><stop offset=".925" stop-color="#d65811"></stop><stop offset=".982" stop-color="#c03a11"></stop><stop offset="1" stop-color="#b72f11"></stop></linearGradient><path fill="url(#matlab-gr3)" d="M32,3c5,0,13,27,15,34c0,0-7.017-6.63-11-6s-5.47,6.548-9.725,10.756C23.5,44.5,21,45,21,45	s-0.206-8.124-5-11c-2.5-1.5-5-1-5-1s6.049-2.901,9.474-8.174S28.5,3,32,3z"></path></svg><span>MATLAB</span></div>
-        <div class="skill-item"><i class='bx bx-brain skill-icon'></i><span>Machine Learning</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects" class="section">
-    <div class="content-wrapper"><h2 class="section-title hidden">Projects</h2></div>
-    <div class="carousel hidden" id="projects-carousel">
-        <div class="carousel-viewport"><div class="carousel-track"></div></div>
-        <button class="carousel-button carousel-button--left"><i class='bx bx-chevron-left'></i></button>
-        <button class="carousel-button carousel-button--right"><i class='bx bx-chevron-right'></i></button>
-    </div>
-  </section>
-
-  <section id="certifications" class="section">
-    <div class="content-wrapper"><h2 class="section-title hidden">Certifications</h2></div>
-    <div class="marquee hidden">
-        <div class="marquee-track">
-            <div class="cert-item" onclick="openModal('ibm-python-modal')"><i class='bx bxl-python'></i><span>IBM: Python for Data Science</span></div>
-            <div class="cert-item" onclick="openModal('ibm-ml-modal')"><i class='bx bx-brain'></i><span>IBM: Machine Learning</span></div>
-            <div class="cert-item" onclick="openModal('itvedant-sql-modal')"><i class='bx bx-data'></i><span>ITVEDANT: SQL</span></div>
-            <div class="cert-item" onclick="openModal('itvedant-powerbi-modal')"><i class='bx bxs-bar-chart-alt-2'></i><span>ITVEDANT: Power BI</span></div>
-            <div class="cert-item" aria-hidden="true" onclick="openModal('ibm-python-modal')"><i class='bx bxl-python'></i><span>IBM: Python for Data Science</span></div>
-            <div class="cert-item" aria-hidden="true" onclick="openModal('ibm-ml-modal')"><i class='bx bx-brain'></i><span>IBM: Machine Learning</span></div>
-            <div class="cert-item" aria-hidden="true" onclick="openModal('itvedant-sql-modal')"><i class='bx bx-data'></i><span>ITVEDANT: SQL</span></div>
-            <div class="cert-item" aria-hidden="true" onclick="openModal('itvedant-powerbi-modal')"><i class='bx bxs-bar-chart-alt-2'></i><span>ITVEDANT: Power BI</span></div>
+    <div id="content-container">
+        <div class="content-box">
+            <button class="close-btn">&times;</button>
+            <div id="resume-content" class="project-details">
+                <h2>Resume</h2>
+                <h3>TANISHK MANOJ MESTRY</h3>
+                <p>+91 7047991555 | tanishkmestry4183@gmail.com | <a href="#" target="_blank">LinkedIn</a> | <a href="#" target="_blank">GitHub</a></p>
+                <h4>SUMMARY</h4>
+                <p>Applied Statistics and Data Analytics student with strong skills in data analysis, statistical modelling, and visualization. Proficient in Advanced Excel, SQL, Python, R, MATLAB, Tableau, and Power BI for data cleaning, reporting, and Interactive Dashboards. Completed multiple certifications in Data Science, ML & Al, with hands-on projects in forecasting, business analytics, and visualization. Gained professional exposure as an Accounts Assistant, applying analytical and reporting skills to financial data. Detail-oriented and analytical, eager to apply data-driven insights in academic, research, and business environments.</p>
+                <h4>WORK EXPERIENCE</h4>
+                <p><strong>BHOIR & PATIL ASSOCIATES, TAX CONSULTANTS</strong><br>Accounts Assistant, Apr 2024-Mar 2025</p>
+                <ul>
+                    <li>Managed and entered client financial data, including balance sheets, purchase and sales records, using Tally.</li>
+                    <li>Prepared and analysed financial statements and maintained detailed creditor and debtor records in Excel.</li>
+                    <li>Ensured tax compliance by generating accurate reports through GST software.</li>
+                </ul>
+                <h4>EDUCATION</h4>
+                <p><strong>ITVEDANT</strong><br>Master in Data Science & Analytics with Artificial Intelligence: 70.01% (January 2025)</p>
+                <p><strong>SVKM's MITHIBAI COLLEGE</strong><br>Pursuing B.Sc. in Applied Statistics & Data Analytics (Expected: April 2026)</p>
+                <p>Higher Secondary Certificate (HSC): 77.9%</p>
+                <p><strong>ANAND ASHRAM CONVENT ENGLISH HIGH SCHOOL</strong><br>Secondary School Certificate (SSC): 77.4%</p>
+            </div>
+            <div id="project1-content" class="project-details">
+                <h2>Product Sales Analysis (Excel)</h2>
+                <p>Designed an interactive dashboard to analyse product sales trends using advanced data cleaning and visualization techniques for performance tracking.</p>
+                <div style="width:100%; height: 300px; background: #eee; border-radius: 8px; display:flex; align-items:center; justify-content:center;">Image Placeholder</div>
+                <button class="gemini-btn" data-project-id="project1">✨ Suggest Next Steps</button>
+                <div class="gemini-response" id="response-project1"></div>
+            </div>
+             <div id="project2-content" class="project-details">
+                <h2>Global YouTube Statistics (Power BI)</h2>
+                <p>Developed an interactive dashboard to evaluate channel performance, video views, and earnings, delivering actionable insights for content strategy.</p>
+                 <div style="width:100%; height: 300px; background: #eee; border-radius: 8px; display:flex; align-items:center; justify-content:center;">Image Placeholder</div>
+                <button class="gemini-btn" data-project-id="project2">✨ Suggest Next Steps</button>
+                <div class="gemini-response" id="response-project2"></div>
+            </div>
+            <div id="project3-content" class="project-details">
+                <h2>Video Game Sales Analysis (Tableau)</h2>
+                <p>Built a dynamic dashboard to analyze regional video game sales, identifying key trends and providing data-driven performance insights.</p>
+                <div style="width:100%; height: 300px; background: #eee; border-radius: 8px; display:flex; align-items:center; justify-content:center;">Image Placeholder</div>
+                <button class="gemini-btn" data-project-id="project3">✨ Suggest Next Steps</button>
+                <div class="gemini-response" id="response-project3"></div>
+            </div>
+             <div id="chatbot-content" class="project-details">
+                <h2>AI Career Assistant</h2>
+                <p>Ask me about Tanishk's skills, projects, or experience!</p>
+                <div id="chat-window"></div>
+                <div id="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Ask a question...">
+                    <button id="chat-send">Send</button>
+                </div>
+            </div>
         </div>
     </div>
-  </section>
 
-  <section id="timeline" class="section">
-    <div class="content-wrapper">
-      <h2 class="section-title hidden">Timeline</h2>
-      <div class="timeline-grid hidden">
-        <div class="timeline-column">
-          <h3>Work Experience</h3>
-          <div class="timeline-item">
-            <h4>Bhoir & Patil Associates, Tax Consultants</h4>
-            <p>Accounts Assistant (Apr 2024 - Mar 2025)</p>
-          </div>
-        </div>
-        <div class="timeline-column">
-          <h3>Education</h3>
-          <div class="timeline-item">
-            <h4>SVKM's Mithibai College</h4>
-            <p>B.Sc. in Applied Statistics & Data Analytics (Expected: April 2026)</p>
-          </div>
-          <div class="timeline-item">
-            <h4>ITVEDANT</h4>
-            <p>Master in Data Science & Analytics with AI (Jan 2025)</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
-</main>
+    <script>
+        // --- Basic Three.js Setup ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0xf0f0f0);
+        document.body.appendChild(renderer.domElement);
 
-<div id="youtube-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('youtube-modal')">&times;</span><h2>Global YouTube Statistics</h2><img src="images/placeholder.png" alt="YouTube Project Screenshot"></div></div>
-<div id="sales-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('sales-modal')">&times;</span><h2>Product Sales Analysis</h2><img src="images/placeholder.png" alt="Sales Project Screenshot"></div></div>
-<div id="game-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('game-modal')">&times;</span><h2>Video Game Sales Analysis</h2><img src="images/placeholder.png" alt="Game Project Screenshot"></div></div>
-<div id="library-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('library-modal')">&times;</span><h2>Library Management System</h2><img src="images/placeholder.png" alt="Library Project Screenshot"></div></div>
-<div id="ibm-python-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('ibm-python-modal')">&times;</span><img src="images/placeholder.png" alt="IBM Python Certificate"></div></div>
-<div id="ibm-ml-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('ibm-ml-modal')">&times;</span><img src="images/placeholder.png" alt="IBM Machine Learning Certificate"></div></div>
-<div id="itvedant-sql-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('itvedant-sql-modal')">&times;</span><img src="images/placeholder.png" alt="ITVEDANT SQL Certificate"></div></div>
-<div id="itvedant-powerbi-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('itvedant-powerbi-modal')">&times;</span><img src="images/placeholder.png" alt="ITVEDANT Power BI Certificate"></div></div>
+        // --- Lighting ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 10, 7.5);
+        scene.add(directionalLight);
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // --- Cursor Spotlight ---
-    const spotlight = document.querySelector('.cursor-spotlight');
-    if (spotlight) {
-        document.addEventListener('mousemove', (e) => {
-            spotlight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        });
-    }
+        camera.position.z = 150;
+        camera.position.y = 20;
+        camera.lookAt(0, 0, 0);
 
-    // --- Theme Toggle ---
-    const toggleCheckbox = document.getElementById('checkbox');
-    function setTheme(isLight) {
-        document.body.classList.toggle('light-theme', isLight);
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        if(toggleCheckbox) toggleCheckbox.checked = isLight;
-    }
-    if(toggleCheckbox) {
-        toggleCheckbox.addEventListener('change', () => setTheme(toggleCheckbox.checked));
-        const savedTheme = localStorage.getItem('theme');
-        setTheme(savedTheme === 'light');
-    }
+        // --- Desk and Objects ---
+        const objects = [];
+        const interactiveObjects = [];
 
-    // --- Typing Effect ---
-    const typingElement = document.getElementById('typing-text');
-    if (typingElement) {
-        const textToType = "TANISHK MANOJ MESTRY";
-        let i = 0;
-        function typeWriter() {
-            if (i < textToType.length) {
-                typingElement.innerHTML += textToType.charAt(i);
-                i++;
-                setTimeout(typeWriter, 120);
+        // Desk
+        const deskGeometry = new THREE.BoxGeometry(200, 2, 100);
+        const deskMaterial = new THREE.MeshStandardMaterial({ color: 0x8B4513 });
+        const desk = new THREE.Mesh(deskGeometry, deskMaterial);
+        desk.position.y = -1;
+        scene.add(desk);
+
+        // --- Gemini API Setup ---
+        const apiKey = ""; 
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+        async function callGeminiAPI(prompt, systemPrompt = null, retries = 3, delay = 1000) {
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+            };
+
+            if (systemPrompt) {
+                payload.systemInstruction = { parts: [{ text: systemPrompt }] };
+            }
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    if (response.status === 429 && retries > 0) {
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        return callGeminiAPI(prompt, systemPrompt, retries - 1, delay * 2);
+                    }
+                    throw new Error(`API call failed with status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                return result.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
+            } catch (error) {
+                console.error("Gemini API call failed:", error);
+                if (retries > 0) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return callGeminiAPI(prompt, systemPrompt, retries - 1, delay * 2);
+                }
+                return "An error occurred while trying to connect to the AI assistant.";
             }
         }
-        setTimeout(typeWriter, 500);
-    }
 
-    // --- Scroll Animations ---
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
+
+        // --- Create interactive items on the desk ---
+        function createInteractiveItem(name, config) {
+            const geometry = new THREE.BoxGeometry(config.width, config.height, config.depth);
+            const material = new THREE.MeshStandardMaterial({ 
+                color: config.color,
+                map: createTexture(config.label),
+             });
+            const item = new THREE.Mesh(geometry, material);
+            item.position.set(config.x, config.height / 2, config.z);
+            item.rotation.y = config.rotation || 0;
+            item.name = name;
+            item.userData = { 
+                originalPosition: item.position.clone(),
+                originalRotation: item.rotation.clone(),
+                bringToFront: bringToFront,
+                bringBack: bringBack,
+                contentId: config.contentId
+            };
+            scene.add(item);
+            objects.push(item);
+            interactiveObjects.push(item);
+            return item;
+        }
+        
+        function createTexture(text) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 256;
+            canvas.height = 128;
+            const context = canvas.getContext('2d');
+            context.fillStyle = '#fff';
+            context.fillRect(0, 0, 256, 128);
+            context.font = '20px Arial';
+            context.fillStyle = '#000';
+            context.textAlign = 'center';
+            context.fillText(text, 128, 70);
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.needsUpdate = true;
+            return texture;
+        }
+
+        // Resume
+        createInteractiveItem("resume", { width: 21, height: 1, depth: 29.7, x: -50, z: 10, color: 0xffffff, label: 'Resume', contentId: 'resume-content' });
+        // Projects
+        createInteractiveItem("project1", { width: 30, height: 1, depth: 20, x: 0, z: -20, color: 0xeeeeee, label: 'Sales Analysis', contentId: 'project1-content' });
+        createInteractiveItem("project2", { width: 30, height: 1, depth: 20, x: 40, z: -15, color: 0xdddddd, label: 'YouTube Stats', contentId: 'project2-content' });
+        createInteractiveItem("project3", { width: 30, height: 1, depth: 20, x: -30, z: -25, color: 0xcccccc, label: 'Game Sales', contentId: 'project3-content' });
+
+        // AI Assistant Sphere
+        const assistantGeometry = new THREE.SphereGeometry(8, 32, 32);
+        const assistantMaterial = new THREE.MeshStandardMaterial({
+            color: 0x2d2dff, metalness: 0.8, roughness: 0.2, emissive: 0x1a1a8d
+        });
+        const assistantSphere = new THREE.Mesh(assistantGeometry, assistantMaterial);
+        assistantSphere.position.set(60, 8, 20);
+        assistantSphere.name = "ai_assistant";
+        assistantSphere.userData = { 
+            originalPosition: assistantSphere.position.clone(),
+            originalRotation: assistantSphere.rotation.clone(),
+            bringToFront: bringToFront,
+            bringBack: bringBack,
+            contentId: 'chatbot-content'
+        };
+        scene.add(assistantSphere);
+        objects.push(assistantSphere);
+        interactiveObjects.push(assistantSphere);
+
+
+        // --- Interaction Logic ---
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        let hoveredObject = null;
+        let selectedObject = null;
+
+        function onMouseMove(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            if (!selectedObject) {
+                gsap.to(camera.position, { x: -mouse.x * 5, y: 20 + mouse.y * 5, duration: 0.5, ease: "power1.out" });
+                camera.lookAt(0, 0, 0);
+            }
+        }
+        
+        function onMouseClick(event) {
+            if (hoveredObject && !selectedObject) {
+                selectedObject = hoveredObject;
+                selectedObject.userData.bringToFront();
+            }
+        }
+
+        function bringToFront() {
+            if (selectedObject) return;
+            selectedObject = this;
+            
+            const targetPosition = new THREE.Vector3();
+            camera.getWorldDirection(targetPosition);
+            targetPosition.multiplyScalar(80).add(camera.position);
+
+            const isAISphere = this.name === "ai_assistant";
+
+            gsap.to(this.position, {
+                x: camera.position.x,
+                y: isAISphere ? camera.position.y : camera.position.y,
+                z: camera.position.z - (isAISphere ? 30 : 50),
+                duration: 1,
+                ease: 'power3.inOut'
+            });
+            gsap.to(this.rotation, {
+                x: 0, y: 0, z: 0, duration: 1, ease: 'power3.inOut',
+                onComplete: () => showContent(this.userData.contentId)
+            });
+             gsap.to(camera.position, { x: 0, y: 20, z: 150, duration: 1, ease: 'power3.inOut' });
+        }
+
+        function bringBack() {
+            if (!this) return;
+            hideContent();
+            gsap.to(this.position, {
+                x: this.userData.originalPosition.x, y: this.userData.originalPosition.y, z: this.userData.originalPosition.z,
+                duration: 1, ease: 'power3.inOut'
+            });
+            gsap.to(this.rotation, {
+                x: this.userData.originalRotation.x, y: this.userData.originalRotation.y, z: this.userData.originalRotation.z,
+                duration: 1, ease: 'power3.inOut', onComplete: () => { selectedObject = null; }
+            });
+        }
+
+        // --- Content Display & Gemini Logic ---
+        const contentContainer = document.getElementById('content-container');
+        const allDetails = document.querySelectorAll('.project-details');
+        const closeBtn = document.querySelector('.close-btn');
+
+        function showContent(id) {
+            allDetails.forEach(detail => detail.style.display = 'none');
+            const activeContent = document.getElementById(id);
+            if (activeContent) {
+                activeContent.style.display = 'flex';
+                contentContainer.style.display = 'flex';
+            }
+        }
+
+        function hideContent() {
+            contentContainer.style.display = 'none';
+        }
+
+        closeBtn.addEventListener('click', () => {
+            if (selectedObject) {
+                selectedObject.userData.bringBack.call(selectedObject);
             }
         });
-    }, { threshold: 0.15 });
-    const hiddenElements = document.querySelectorAll('.hidden');
-    hiddenElements.forEach((el) => observer.observe(el));
+        
+        // Project idea generator
+        document.querySelectorAll('.gemini-btn').forEach(button => {
+            button.addEventListener('click', async () => {
+                const projectId = button.dataset.projectId;
+                const responseDiv = document.getElementById(`response-${projectId}`);
+                const projectContent = document.getElementById(`${projectId}-content`);
+                const projectTitle = projectContent.querySelector('h2').innerText;
+                const projectDesc = projectContent.querySelector('p').innerText;
 
-    // --- Carousel Class ---
-    class Carousel {
-        constructor(carouselElement, data, slideGenerator) {
-            if (!carouselElement) return;
-            this.track = carouselElement.querySelector('.carousel-track');
-            this.prevButton = carouselElement.querySelector('.carousel-button--left');
-            this.nextButton = carouselElement.querySelector('.carousel-button--right');
-            this.slides = [];
-            this.data = data;
-            this.slideGenerator = slideGenerator;
-            this.currentIndex = 0;
-            this.slideWidth = 0;
-            this.init();
-        }
-        init() {
-            const extendedData = [...this.data, ...this.data, ...this.data];
-            this.track.innerHTML = extendedData.map(this.slideGenerator).join('');
-            this.slides = Array.from(this.track.children);
-            this.currentIndex = this.data.length;
-            this.resizeObserver = new ResizeObserver(() => this.calculatePositions());
-            this.resizeObserver.observe(document.body);
-            this.attachEventListeners();
-        }
-        calculatePositions() {
-            if (this.slides.length === 0) return;
-            this.slideWidth = this.slides[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(this.slides[0]).marginLeft) + parseFloat(getComputedStyle(this.slides[0]).marginRight));
-            this.track.style.transition = 'none';
-            this.track.style.transform = `translateX(-${this.currentIndex * this.slideWidth}px)`;
-            setTimeout(() => { this.updateClasses(); }, 50);
-        }
-        moveTo(index) {
-            if (this.track.clientWidth <= this.track.parentElement.clientWidth) return;
-            this.track.style.transition = 'transform 0.5s ease';
-            this.track.style.transform = `translateX(-${index * this.slideWidth}px)`;
-            this.currentIndex = index;
-            this.updateClasses();
-        }
-        updateClasses() {
-            this.slides.forEach((slide, i) => {
-                slide.classList.toggle('is-selected', i === this.currentIndex);
+                button.disabled = true;
+                button.innerHTML = '<span class="spinner"></span> Generating...';
+                
+                const prompt = `Based on the following data analytics project, suggest three innovative and impressive next steps or related project ideas. The goal is to showcase forward-thinking and an ambition to use more advanced technologies. Keep the suggestions concise and in a bulleted list. Project Title: ${projectTitle}. Description: ${projectDesc}`;
+                
+                const response = await callGeminiAPI(prompt);
+                responseDiv.innerHTML = response.replace(/\*/g, '•');
+                
+                button.disabled = false;
+                button.innerHTML = '✨ Suggest Next Steps';
             });
+        });
+        
+        // Chatbot logic
+        const chatWindow = document.getElementById('chat-window');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const resumeText = document.getElementById('resume-content').innerText;
+        const chatSystemPrompt = `You are a friendly and professional AI career assistant representing Tanishk Mestry. Your goal is to answer questions from potential recruiters or employers based on Tanishk's resume. Be concise, helpful, and always positive. Here is the resume information to use as your knowledge base: ${resumeText}. Do not go beyond the information provided in the resume.`;
+        
+        async function handleChat() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            appendMessage(userMessage, 'user-message');
+            chatInput.value = '';
+            chatSend.disabled = true;
+            chatSend.innerHTML = '<span class="spinner"></span>';
+
+            const botResponse = await callGeminiAPI(userMessage, chatSystemPrompt);
+            appendMessage(botResponse, 'bot-message');
+            chatSend.disabled = false;
+            chatSend.textContent = 'Send';
         }
-        attachEventListeners() {
-            this.prevButton.addEventListener('click', () => this.moveTo(this.currentIndex - 1));
-            this.nextButton.addEventListener('click', () => this.moveTo(this.currentIndex + 1));
-            this.track.addEventListener('transitionend', () => {
-                if (this.currentIndex < this.data.length) {
-                    this.currentIndex += this.data.length;
-                    this.track.style.transition = 'none';
-                    this.track.style.transform = `translateX(-${this.currentIndex * this.slideWidth}px)`;
+
+        function appendMessage(text, className) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', className);
+            messageElement.textContent = text;
+            chatWindow.appendChild(messageElement);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        chatSend.addEventListener('click', handleChat);
+        chatInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                handleChat();
+            }
+        });
+
+
+        // --- Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (!selectedObject) {
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObjects(interactiveObjects);
+
+                if (intersects.length > 0) {
+                    if (hoveredObject !== intersects[0].object) {
+                        if (hoveredObject) gsap.to(hoveredObject.position, { y: hoveredObject.userData.originalPosition.y, duration: 0.3 });
+                        hoveredObject = intersects[0].object;
+                        gsap.to(hoveredObject.position, { y: hoveredObject.userData.originalPosition.y + 5, duration: 0.3 });
+                        document.body.style.cursor = 'pointer';
+                    }
+                } else {
+                    if (hoveredObject) {
+                        gsap.to(hoveredObject.position, { y: hoveredObject.userData.originalPosition.y, duration: 0.3 });
+                        hoveredObject = null;
+                        document.body.style.cursor = 'default';
+                    }
                 }
-                if (this.currentIndex >= this.data.length * 2) {
-                    this.currentIndex -= this.data.length;
-                    this.track.style.transition = 'none';
-                    this.track.style.transform = `translateX(-${this.currentIndex * this.slideWidth}px)`;
+            } else {
+                 if (selectedObject.name === "ai_assistant") {
+                    selectedObject.rotation.y += 0.005;
                 }
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // --- Event Listeners ---
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('click', onMouseClick);
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- Loader ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            gsap.to(loader, {
+                opacity: 0, duration: 1,
+                onComplete: () => loader.style.display = 'none'
             });
-        }
-    }
+            animate();
+        });
+    </script>
+</body>
+</html>
 
-    // --- Data and Initialization ---
-    const projectData = [
-        { id: 'youtube-modal', bg: 'images/placeholder.png', title: 'Global YouTube Statistics'},
-        { id: 'sales-modal', bg: 'images/placeholder.png', title: 'Product Sales Analysis'},
-        { id: 'game-modal', bg: 'images/placeholder.png', title: 'Video Game Sales Analysis'},
-        { id: 'library-modal', bg: 'images/placeholder.png', title: 'Library Management System'}
-    ];
-
-    const projectsCarouselEl = document.getElementById('projects-carousel');
-    const projectSlideGenerator = item => `<div class="carousel-slide project-slide" style="background-image: url('${item.bg}');" onclick="openModal('${item.id}')"><div class="project-content"><h3>${item.title}</h3></div></div>`;
-    new Carousel(projectsCarouselEl, projectData, projectSlideGenerator);
-});
-  
-function openModal(modalId) { 
-  const modal = document.getElementById(modalId);
-  if (modal) modal.style.display = "block";
-}
-function closeModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (modal) modal.style.display = "none";
-}
-window.onclick = function(event) { 
-  if (event.target.classList.contains('modal')) {
-    event.target.style.display = "none";
-  }
-}
-</script>
