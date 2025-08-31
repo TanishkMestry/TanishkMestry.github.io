@@ -1,3 +1,8 @@
+---
+layout: default
+title: Tanishk Manoj Mestry - Portfolio
+---
+
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 <style>
@@ -27,14 +32,7 @@
     font-family: 'Roboto Mono', monospace;
     margin: 0; padding: 0;
     transition: background-color 0.5s;
-    overflow: hidden; /* Prevent normal scrollbar */
-  }
-
-  .main-container {
-    height: 100vh;
-    width: 100vw;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .cursor-spotlight {
@@ -45,15 +43,17 @@
     border-radius: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
-    z-index: 1002;
+    z-index: -1;
     filter: blur(100px);
     opacity: 0.2;
     transition: transform 0.1s ease-out;
   }
+  body.light-theme .cursor-spotlight { opacity: 0.4; }
 
   .main-header {
     position: fixed;
-    top: 0; right: 0;
+    top: 0;
+    right: 0;
     padding: 1.5rem 2rem;
     z-index: 1000;
   }
@@ -68,62 +68,59 @@
     filter: grayscale(1) brightness(0.8) contrast(5) invert(1);
   }
 
-  .slide {
-    height: 100vh;
-    width: 100vw;
-    scroll-snap-align: start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 4rem;
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-  }
-  .slide-content { width: 100%; max-width: 1200px; }
-  .section-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 4rem;
-    text-align: center;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .content-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section { padding: 8rem 0; border-bottom: 1px solid var(--border-color); }
+  .section-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 4rem; text-align: center; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   
+  #welcome {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   #welcome h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); margin: 0; line-height: 1.1; white-space: nowrap; }
   #welcome .typing-effect { border-right: 4px solid var(--text-color); animation: blink-caret .75s step-end infinite; padding-right: 2px; }
   @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--text-color); } }
   #welcome h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 300; margin: 1.5rem 0 2.5rem 0; max-width: 600px; color: var(--text-muted); }
   #welcome .social-links a { font-size: 2rem; margin-right: 1.5rem; color: var(--text-muted); transition: color 0.3s; }
+  #welcome .social-links a:hover { color: var(--color-2); }
   
-  .skills-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem 3rem; perspective: 1000px; }
-  .skill-item { text-align: center; transition: transform 0.4s ease; }
-  .skill-item:hover { transform: translateZ(20px) scale(1.1); }
+  .skills-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem 3rem; }
+  .skill-item { text-align: center; transition: transform 0.3s ease; }
+  .skill-item:hover { transform: scale(1.1); }
   .skill-item .skill-icon { height: 60px; width: 60px; margin-bottom: 1rem; }
   .skill-item span { font-weight: bold; }
 
-  .carousel { position: relative; width: 100%; }
+  .carousel { position: relative; padding: 2rem 0; }
   .carousel-viewport { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent); mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent); }
-  .carousel-track { display: flex; transition: transform 0.5s ease; }
+  .carousel-track { display: flex; }
   .carousel-slide { min-width: 50%; margin: 0 2%; box-sizing: border-box; transition: transform 0.5s, opacity 0.5s; opacity: 0.4; transform: scale(0.8); cursor: pointer; }
-  #certs-carousel .carousel-slide { min-width: 25%; }
   .carousel-slide.is-selected { opacity: 1; transform: scale(1); }
   .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(128,128,128,0.2); border: 1px solid var(--border-color); color: var(--text-color); border-radius: 50%; width: 50px; height: 50px; cursor: pointer; z-index: 10; font-size: 24px; display: flex; align-items: center; justify-content: center; }
+  .carousel-button:hover { background: rgba(128,128,128,0.4); }
   .carousel-button--left { left: 0; }
   .carousel-button--right { right: 0; }
   
   .project-slide { position: relative; border-radius: 16px; overflow: hidden; min-height: 450px; background-size: cover; background-position: center; color: #fff; }
   .project-slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%); }
   .project-content { position: absolute; bottom: 0; left: 0; padding: 2rem; z-index: 2; }
+  .project-content h3 { margin: 0 0 0.5rem 0; font-size: 1.8rem; }
   
-  .cert-slide { min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-  .cert-slide i { font-size: 60px; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  #certifications.section { padding: 8rem 0; width: 100%; }
+  .marquee { width: 100vw; max-width: 100%; overflow: hidden; position: relative; }
+  .marquee-track { display: flex; width: fit-content; animation: marquee 40s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .cert-item { flex-shrink: 0; width: 300px; padding: 2rem; text-align: center; cursor: pointer; transition: transform 0.3s ease; }
+  .cert-item:hover { transform: scale(1.1); }
+  .cert-item i { font-size: 60px; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   
   .hidden { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
   .show { opacity: 1; transform: translateY(0); }
   .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
   .modal-content { background-color: var(--bg-color); border: 1px solid var(--border-color); margin: 5% auto; padding: 2rem; width: 80%; max-width: 900px; position: relative; border-radius: 8px; }
+  .modal-content img { width: 100%; }
+  .close-button { color: #aaaaaa; position: absolute; top: 1rem; right: 1.5rem; font-size: 2.5rem; font-weight: bold; cursor: pointer; }
 </style>
 
 <div class="cursor-spotlight"></div>
@@ -137,12 +134,11 @@
   </label>
 </header>
 
-<div class="main-container" id="main-container">
-
-  <section id="welcome" class="slide">
+<main>
+  <section id="welcome" class="section">
     <div class="content-wrapper">
       <h1 class="typing-effect hidden" id="typing-text"></h1>
-      <h3 class="hidden">Applied Statistics and Data Analytics student with strong skills in Data Analysis and Visualization.</h3>
+      <h3 class="hidden">Applied Statistics and Data Analytics student with strong skills in data analysis, statistical modelling, and visualization.</h3>
       <div class="social-links hidden">
         <a href="mailto:tanishkmestry4183@gmail.com" target="_blank" title="Email"><i class='bx bx-envelope'></i></a>
         <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_URL" target="_blank" title="LinkedIn"><i class='bx bxl-linkedin-square'></i></a>
@@ -151,7 +147,7 @@
     </div>
   </section>
 
-  <section id="skills" class="slide">
+  <section id="skills" class="section">
     <div class="content-wrapper">
       <h2 class="section-title hidden">Technical Skills</h2>
       <div class="skills-container hidden">
@@ -167,73 +163,53 @@
     </div>
   </section>
 
-<section id="projects" class="slide">
-  <div class="content-wrapper">
-    <h2 class="section-title hidden">Projects</h2>
+  <section id="projects" class="section">
+    <div class="content-wrapper"><h2 class="section-title hidden">Projects</h2></div>
     <div class="carousel hidden" id="projects-carousel">
-      <div class="carousel-viewport">
-        <div class="carousel-track">
-          <!-- Add project slides here -->
-          <div class="project-slide" style="background-image:url('images/project1.png')">
-            <div class="project-content">
-              <h3>Global YouTube Stats</h3>
-            </div>
-          </div>
-          <div class="project-slide" style="background-image:url('images/project2.png')">
-            <div class="project-content">
-              <h3>Product Sales Analysis</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-button carousel-button--left"><i class='bx bx-chevron-left'></i></button>
-      <button class="carousel-button carousel-button--right"><i class='bx bx-chevron-right'></i></button>
+        <div class="carousel-viewport"><div class="carousel-track"></div></div>
+        <button class="carousel-button carousel-button--left"><i class='bx bx-chevron-left'></i></button>
+        <button class="carousel-button carousel-button--right"><i class='bx bx-chevron-right'></i></button>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="certifications" class="slide">
-  <div class="content-wrapper">
-    <h2 class="section-title hidden">Certifications</h2>
-    <div class="carousel hidden" id="certs-carousel">
-      <div class="carousel-viewport">
-        <div class="carousel-track">
-          <!-- Certification slides -->
-          <div class="cert-slide" onclick="openModal('ibm-python-modal')"><i class='bx bxl-python'></i><span>IBM: Python</span></div>
-          <div class="cert-slide" onclick="openModal('ibm-ml-modal')"><i class='bx bx-brain'></i><span>IBM: Machine Learning</span></div>
-          <div class="cert-slide" onclick="openModal('itvedant-sql-modal')"><i class='bx bx-data'></i><span>ITVEDANT: SQL</span></div>
-          <div class="cert-slide" onclick="openModal('itvedant-powerbi-modal')"><i class='bx bxs-bar-chart-alt-2'></i><span>Power BI</span></div>
+  <section id="certifications" class="section">
+    <div class="content-wrapper"><h2 class="section-title hidden">Certifications</h2></div>
+    <div class="marquee hidden">
+        <div class="marquee-track">
+            <div class="cert-item" onclick="openModal('ibm-python-modal')"><i class='bx bxl-python'></i><span>IBM: Python for Data Science</span></div>
+            <div class="cert-item" onclick="openModal('ibm-ml-modal')"><i class='bx bx-brain'></i><span>IBM: Machine Learning</span></div>
+            <div class="cert-item" onclick="openModal('itvedant-sql-modal')"><i class='bx bx-data'></i><span>ITVEDANT: SQL</span></div>
+            <div class="cert-item" onclick="openModal('itvedant-powerbi-modal')"><i class='bx bxs-bar-chart-alt-2'></i><span>ITVEDANT: Power BI</span></div>
+            <div class="cert-item" aria-hidden="true" onclick="openModal('ibm-python-modal')"><i class='bx bxl-python'></i><span>IBM: Python for Data Science</span></div>
+            <div class="cert-item" aria-hidden="true" onclick="openModal('ibm-ml-modal')"><i class='bx bx-brain'></i><span>IBM: Machine Learning</span></div>
+            <div class="cert-item" aria-hidden="true" onclick="openModal('itvedant-sql-modal')"><i class='bx bx-data'></i><span>ITVEDANT: SQL</span></div>
+            <div class="cert-item" aria-hidden="true" onclick="openModal('itvedant-powerbi-modal')"><i class='bx bxs-bar-chart-alt-2'></i><span>ITVEDANT: Power BI</span></div>
         </div>
-      </div>
-      <button class="carousel-button carousel-button--left"><i class='bx bx-chevron-left'></i></button>
-      <button class="carousel-button carousel-button--right"><i class='bx bx-chevron-right'></i></button>
     </div>
-  </div>
-</section>
+  </section>
 
-
-  <section id="experience" class="slide">
+  <section id="experience" class="section">
     <div class="content-wrapper">
         <h2 class="section-title hidden">Work Experience</h2>
         <div class="hidden">
-            <h3>Bhoir & Patil Associates, Tax Consultants (Apr 2024 - Mar 2025)</h3>
+            <h3>Bhoir & Patil Associates, Tax Consultants <span style="color: var(--text-muted);">(Apr 2024 - Mar 2025)</span></h3>
             <p><strong>Accounts Assistant:</strong> Managed and entered client financial data, including balance sheets, purchase and sales records, using Tally. Prepared and analysed financial statements and maintained detailed creditor and debtor records in Excel. Ensured tax compliance by generating accurate reports through GST software.</p>
         </div>
     </div>
   </section>
 
- <section id="education" class="slide">
-  <div class="content-wrapper" style="padding: 3rem;">
-    <h2 class="section-title hidden" style="font-size: 3rem;">Education</h2>
-    <div class="hidden">
-      <h3 style="font-size: 2rem; margin-top: 2rem;">SVKM's Mithibai College (Expected: April 2026)</h3>
-      <p style="font-size: 1.5rem; line-height: 2rem;">B.Sc. in Applied Statistics & Data Analytics</p>
-
-      <h3 style="font-size: 2rem; margin-top: 3rem;">ITVEDANT (Jan 2025)</h3>
-      <p style="font-size: 1.5rem; line-height: 2rem;">Master in Data Science & Analytics with Artificial Intelligence</p>
+  <section id="education" class="section">
+    <div class="content-wrapper">
+        <h2 class="section-title hidden">Education</h2>
+        <div class="hidden">
+            <h3>SVKM's Mithibai College <span style="color: var(--text-muted);">(Expected: April 2026)</span></h3>
+            <p>B.Sc. in Applied Statistics & Data Analytics</p>
+            <h3 style="margin-top: 2rem;">ITVEDANT <span style="color: var(--text-muted);">(Jan 2025)</span></h3>
+            <p>Master in Data Science & Analytics with Artificial Intelligence</p>
+        </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
 <div id="youtube-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('youtube-modal')">&times;</span><h2>Global YouTube Statistics</h2><img src="images/placeholder.png" alt="YouTube Project Screenshot"><p>Here you can add a more detailed description of the project.</p></div></div>
 <div id="sales-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('sales-modal')">&times;</span><h2>Product Sales Analysis</h2><img src="images/placeholder.png" alt="Sales Project Screenshot"></div></div>
@@ -269,16 +245,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Typing Effect ---
     const typingElement = document.getElementById('typing-text');
-    const textToType = "TANISHK MESTRY";
+    const textToType = "TANISHK MANOJ MESTRY";
     let i = 0;
     function typeWriter() {
+        if (!typingElement) return;
         if (i < textToType.length) {
             typingElement.innerHTML += textToType.charAt(i);
             i++;
             setTimeout(typeWriter, 120);
         }
     }
-    if(typingElement) setTimeout(typeWriter, 500);
+    setTimeout(typeWriter, 500);
 
     // --- Scroll Animations ---
     const observer = new IntersectionObserver((entries) => {
@@ -322,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => { this.updateClasses(); }, 50);
         }
         moveTo(index) {
+            if (this.track.clientWidth <= this.track.parentElement.clientWidth) return;
             this.track.style.transition = 'transform 0.5s ease';
             this.track.style.transform = `translateX(-${index * this.slideWidth}px)`;
             this.currentIndex = index;
@@ -352,39 +330,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Data and Initialization ---
     const projectData = [
-        { id: 'youtube-modal', bg: 'images/placeholder.png', tag: 'Power BI', title: 'Global YouTube Statistics', desc: 'Interactive dashboard to evaluate channel performance.'},
-        { id: 'sales-modal', bg: 'images/placeholder.png', tag: 'Excel', title: 'Product Sales Analysis', desc: 'Dashboard for sales trends and performance tracking.'},
-        { id: 'game-modal', bg: 'images/placeholder.png', tag: 'Tableau', title: 'Video Game Sales Analysis', desc: 'Dynamic dashboard to analyze regional video game sales.'},
-        { id: 'library-modal', bg: 'images/placeholder.png', tag: 'SQL', title: 'Library Management System', desc: 'Comprehensive system for managing book inventory.'}
+        { id: 'youtube-modal', bg: 'images/placeholder.png', title: 'Global YouTube Statistics'},
+        { id: 'sales-modal', bg: 'images/placeholder.png', title: 'Product Sales Analysis'},
+        { id: 'game-modal', bg: 'images/placeholder.png', title: 'Video Game Sales Analysis'},
+        { id: 'library-modal', bg: 'images/placeholder.png', title: 'Library Management System'}
     ];
 
     const projectsCarouselEl = document.getElementById('projects-carousel');
-    const projectSlideGenerator = item => `<div class="carousel-slide project-slide" style="background-image: url('${item.bg}');" onclick="openModal('${item.id}')"><div class="project-content"><h3>${item.title}</h3><p>${item.desc}</p></div></div>`;
+    const projectSlideGenerator = item => `<div class="carousel-slide project-slide" style="background-image: url('${item.bg}');" onclick="openModal('${item.id}')"><div class="project-content"><h3>${item.title}</h3></div></div>`;
     new Carousel(projectsCarouselEl, projectData, projectSlideGenerator);
-
-    // --- Side Navigation for Slides ---
-    const mainContainer = document.getElementById('main-container');
-    const slideSections = document.querySelectorAll('.slide');
-    const navLinks = document.querySelectorAll("#page-nav a");
-
-    const slideObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const sectionId = entry.target.id;
-                navLinks.forEach(a => {
-                    a.classList.remove("active");
-                    if (a.getAttribute('href') === `#${sectionId}`) {
-                        a.classList.add("active");
-                    }
-                });
-            }
-        });
-    }, { root: mainContainer, threshold: 0.6 });
-
-    slideSections.forEach(section => slideObserver.observe(section));
 });
   
-function openModal(modalId) { document.getElementById(modalId).style.display = "block"; }
-function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-window.onclick = function(event) { if (event.target.classList.contains('modal')) { event.target.style.display = "none"; } }
+function openModal(modalId) { 
+  const modal = document.getElementById(modalId);
+  if (modal) modal.style.display = "block";
+}
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) modal.style.display = "none";
+}
+window.onclick = function(event) { 
+  if (event.target.classList.contains('modal')) {
+    event.target.style.display = "none";
+  }
+}
 </script>
