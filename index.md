@@ -1,1 +1,295 @@
-# hi i am tanishk mestry
+---
+layout: default
+title: Tanishk Manoj Mestry - Portfolio
+---
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
+
+  :root {
+    --bg-color: #0a0a0a;
+    --primary-color: #00ffff; /* Cyan / Aqua */
+    --text-color: #e0e0e0;
+    --card-bg: #1a1a1a;
+    --border-color: #333;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    padding: 2rem;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  /* --- Header & Typing Animation --- */
+  .header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .typing-effect {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    border-right: 2px solid var(--primary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+    animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary-color); }
+  }
+
+  .header h2 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-top: 0.5rem;
+    font-weight: 300;
+  }
+
+  .social-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.5rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  .social-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--primary-color);
+  }
+  
+  /* --- Section Styling --- */
+  .section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+  }
+
+  .section h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+
+  /* --- Skills Grid --- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-item {
+    background-color: #252525;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .skill-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 10px var(--primary-color);
+  }
+
+  /* --- Projects Grid --- */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background-color: #252525;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .project-card:hover {
+      transform: scale(1.03);
+      border-color: var(--primary-color);
+  }
+
+  .project-card h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+  }
+  
+  .project-card .tech-tag {
+      background-color: var(--primary-color);
+      color: var(--bg-color);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+  }
+
+  /* --- Experience & Education --- */
+  details {
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--border-color);
+    padding-left: 15px;
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    outline: none;
+  }
+  
+  summary:hover {
+      color: var(--primary-color);
+  }
+
+  .job-title, .degree-title {
+      font-style: italic;
+      color: #aaa;
+  }
+
+  /* --- Footer --- */
+  .footer {
+    text-align: center;
+    margin-top: 4rem;
+    color: #888;
+  }
+
+</style>
+
+<div class="container">
+
+  <header class="header">
+    <h1 id="typing-text" class="typing-effect"></h1>
+    <h2>Applied Statistics & Data Analytics Student</h2>
+    <div class="social-links">
+      <a href="mailto:tanishkmestry4183@gmail.com" target="_blank" title="Email">📧</a>
+      <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_URL" target="_blank" title="LinkedIn">🔗</a>
+      <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" title="GitHub">💻</a>
+    </div>
+  </header>
+
+  <section id="summary" class="section">
+    <h2>// Summary</h2>
+    <p>
+      Applied Statistics and Data Analytics student with strong skills in data analysis, statistical modelling, and visualization. Proficient in Advanced Excel, SQL, Python, R, MATLAB, Tableau, and Power BI for data cleaning, reporting, and Interactive Dashboards. Eager to apply data-driven insights in academic, research, and business environments.
+    </p>
+  </section>
+
+  <section id="skills" class="section">
+    <h2>// Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-item">Python</div>
+      <div class="skill-item">SQL</div>
+      <div class="skill-item">R</div>
+      <div class="skill-item">Tableau</div>
+      <div class="skill-item">Power BI</div>
+      <div class="skill-item">Advanced Excel</div>
+      <div class="skill-item">MATLAB</div>
+      <div class="skill-item">Machine Learning</div>
+      <div class="skill-item">Data Analysis</div>
+      <div class="skill-item">Data Visualization</div>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>// Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="tech-tag">Power BI</span>
+        <h3>Global YouTube Statistics</h3>
+        <p>Developed an interactive dashboard to evaluate channel performance, video views, and earnings, delivering actionable insights for content strategy.</p>
+      </div>
+      <div class="project-card">
+        <span class="tech-tag">Excel</span>
+        <h3>Product Sales Analysis</h3>
+        <p>Designed an interactive dashboard to analyse product sales trends using advanced data cleaning and visualization techniques for performance tracking.</p>
+      </div>
+      <div class="project-card">
+        <span class="tech-tag">Tableau</span>
+        <h3>Video Game Sales Analysis</h3>
+        <p>Built a dynamic dashboard to analyze regional video game sales, identifying key trends and providing data-driven performance insights.</p>
+      </div>
+      <div class="project-card">
+        <span class="tech-tag">SQL</span>
+        <h3>Library Management System</h3>
+        <p>Created a comprehensive system for managing book inventory, tracking member activities, and generating detailed analytical reports.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="section">
+    <h2>// Work Experience</h2>
+    <details>
+      <summary>Bhoir & Patil Associates, Tax Consultants (Apr 2024 - Mar 2025)</summary>
+      <p class="job-title">Accounts Assistant</p>
+      <ul>
+        <li>Managed and entered client financial data, including balance sheets, purchase and sales records, using Tally.</li>
+        <li>Prepared and analysed financial statements and maintained detailed creditor and debtor records in Excel.</li>
+        <li>Ensured tax compliance by generating accurate reports through GST software.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section id="education" class="section">
+    <h2>// Education</h2>
+    <details>
+      <summary>SVKM's Mithibai College (Expected: April 2026)</summary>
+      <p class="degree-title">B.Sc. in Applied Statistics & Data Analytics</p>
+    </details>
+    <details>
+      <summary>ITVEDANT (Jan 2025)</summary>
+      <p class="degree-title">Master in Data Science & Analytics with Artificial Intelligence</p>
+    </details>
+  </section>
+  
+  <footer class="footer">
+    <p>&copy; 2025 Tanishk Manoj Mestry. Built with passion and code.</p>
+  </footer>
+
+</div>
+
+<script>
+  const textToType = "TANISHK MANOJ MESTRY";
+  const typingElement = document.getElementById('typing-text');
+  
+  // This function simulates the typing effect.
+  function typeEffect() {
+    typingElement.style.width = '0'; // Reset width
+    typingElement.textContent = textToType;
+    typingElement.style.animation = 'none'; // Reset animation
+    // A small delay to restart the animation properly
+    setTimeout(() => {
+      typingElement.style.animation = '';
+    }, 10);
+  }
+  
+  // Initial call
+  typeEffect();
+  
+  // Optional: Re-trigger the animation every 10 seconds
+  setInterval(typeEffect, 10000);
+</script>
