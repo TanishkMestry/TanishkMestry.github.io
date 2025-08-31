@@ -171,36 +171,50 @@ layout: default
     </div>
   </section>
 
-  <section id="projects" class="slide">
-  <div class="carousel hidden" id="projects-carousel">
-      <div class="carousel-viewport"><div class="carousel-track"></div></div>
+<section id="projects" class="slide">
+  <div class="content-wrapper">
+    <h2 class="section-title hidden">Projects</h2>
+    <div class="carousel hidden" id="projects-carousel">
+      <div class="carousel-viewport">
+        <div class="carousel-track">
+          <!-- Add project slides here -->
+          <div class="project-slide" style="background-image:url('images/project1.png')">
+            <div class="project-content">
+              <h3>Global YouTube Stats</h3>
+            </div>
+          </div>
+          <div class="project-slide" style="background-image:url('images/project2.png')">
+            <div class="project-content">
+              <h3>Product Sales Analysis</h3>
+            </div>
+          </div>
+        </div>
+      </div>
       <button class="carousel-button carousel-button--left"><i class='bx bx-chevron-left'></i></button>
       <button class="carousel-button carousel-button--right"><i class='bx bx-chevron-right'></i></button>
     </div>
-  </section>
-
-  <section id="certifications" class="slide">
-    <div class="content-wrapper">
-        <h2 class="section-title hidden">Projects</h2>
-    </div>
-    <div class="carousel hidden" id="projects-carousel">
-        ...
-    </div>
+  </div>
 </section>
-    <div class="content-wrapper"><h2 class="section-title hidden">Certifications</h2></div>
-    <div class="marquee hidden">
-        <div class="marquee-track">
-            <div class="cert-item" onclick="openModal('ibm-python-modal')"><i class='bx bxl-python'></i><span>IBM: Python for Data Science</span></div>
-            <div class="cert-item" onclick="openModal('ibm-ml-modal')"><i class='bx bx-brain'></i><span>IBM: Machine Learning</span></div>
-            <div class="cert-item" onclick="openModal('itvedant-sql-modal')"><i class='bx bx-data'></i><span>ITVEDANT: SQL</span></div>
-            <div class="cert-item" onclick="openModal('itvedant-powerbi-modal')"><i class='bx bxs-bar-chart-alt-2'></i><span>ITVEDANT: Power BI</span></div>
-            <div class="cert-item" aria-hidden="true" onclick="openModal('ibm-python-modal')"><i class='bx bxl-python'></i><span>IBM: Python for Data Science</span></div>
-            <div class="cert-item" aria-hidden="true" onclick="openModal('ibm-ml-modal')"><i class='bx bx-brain'></i><span>IBM: Machine Learning</span></div>
-            <div class="cert-item" aria-hidden="true" onclick="openModal('itvedant-sql-modal')"><i class='bx bx-data'></i><span>ITVEDANT: SQL</span></div>
-            <div class="cert-item" aria-hidden="true" onclick="openModal('itvedant-powerbi-modal')"><i class='bx bxs-bar-chart-alt-2'></i><span>ITVEDANT: Power BI</span></div>
+
+<section id="certifications" class="slide">
+  <div class="content-wrapper">
+    <h2 class="section-title hidden">Certifications</h2>
+    <div class="carousel hidden" id="certs-carousel">
+      <div class="carousel-viewport">
+        <div class="carousel-track">
+          <!-- Certification slides -->
+          <div class="cert-slide" onclick="openModal('ibm-python-modal')"><i class='bx bxl-python'></i><span>IBM: Python</span></div>
+          <div class="cert-slide" onclick="openModal('ibm-ml-modal')"><i class='bx bx-brain'></i><span>IBM: Machine Learning</span></div>
+          <div class="cert-slide" onclick="openModal('itvedant-sql-modal')"><i class='bx bx-data'></i><span>ITVEDANT: SQL</span></div>
+          <div class="cert-slide" onclick="openModal('itvedant-powerbi-modal')"><i class='bx bxs-bar-chart-alt-2'></i><span>Power BI</span></div>
         </div>
+      </div>
+      <button class="carousel-button carousel-button--left"><i class='bx bx-chevron-left'></i></button>
+      <button class="carousel-button carousel-button--right"><i class='bx bx-chevron-right'></i></button>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <section id="experience" class="slide">
     <div class="content-wrapper">
