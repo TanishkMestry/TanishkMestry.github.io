@@ -32,38 +32,40 @@ title: Tanishk Manoj Mestry - Portfolio
     font-family: 'Roboto Mono', monospace;
     margin: 0; padding: 0;
     transition: background-color 0.5s;
-    overflow-x: hidden;
+    overflow: hidden; /* Prevent normal scrollbar */
+  }
+
+  .main-container {
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
   }
 
   .cursor-spotlight {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 400px;
-    height: 400px;
+    top: 0; left: 0;
+    width: 400px; height: 400px;
     background: radial-gradient(circle, var(--color-2) 0%, transparent 70%);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
-    z-index: -1;
+    z-index: 1002;
     filter: blur(100px);
     opacity: 0.2;
     transition: transform 0.1s ease-out;
   }
-  body.light-theme .cursor-spotlight { opacity: 0.4; }
 
   .main-header {
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 0; right: 0;
     padding: 1.5rem 2rem;
     z-index: 1000;
   }
   .theme-switch { display: inline-block; cursor: pointer; }
   .theme-switch input { display:none; }
   .toggle-icon-svg {
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     transition: transform 0.4s ease, filter 0.4s ease;
   }
   body:not(.light-theme) .toggle-icon-svg {
@@ -71,59 +73,62 @@ title: Tanishk Manoj Mestry - Portfolio
     filter: grayscale(1) brightness(0.8) contrast(5) invert(1);
   }
 
-  .content-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-  .section { padding: 8rem 0; border-bottom: 1px solid var(--border-color); }
-  .section-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 4rem; text-align: center; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  
-  #welcome {
+  .slide {
     height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding: 2rem 4rem;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
   }
+  .slide-content { width: 100%; max-width: 1200px; }
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 4rem;
+    text-align: center;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
   #welcome h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); margin: 0; line-height: 1.1; white-space: nowrap; }
   #welcome .typing-effect { border-right: 4px solid var(--text-color); animation: blink-caret .75s step-end infinite; padding-right: 2px; }
   @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--text-color); } }
   #welcome h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 300; margin: 1.5rem 0 2.5rem 0; max-width: 600px; color: var(--text-muted); }
   #welcome .social-links a { font-size: 2rem; margin-right: 1.5rem; color: var(--text-muted); transition: color 0.3s; }
-  #welcome .social-links a:hover { color: var(--color-2); }
   
-  .skills-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem 3rem; }
-  .skill-item { text-align: center; transition: transform 0.3s ease; }
-  .skill-item:hover { transform: scale(1.1); }
+  .skills-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem 3rem; perspective: 1000px; }
+  .skill-item { text-align: center; transition: transform 0.4s ease; }
+  .skill-item:hover { transform: translateZ(20px) scale(1.1); }
   .skill-item .skill-icon { height: 60px; width: 60px; margin-bottom: 1rem; }
   .skill-item span { font-weight: bold; }
 
-  .carousel { position: relative; padding: 2rem 0; }
-  .carousel-viewport { overflow: hidden; }
+  .carousel { position: relative; width: 100%; }
+  .carousel-viewport { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent); mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent); }
   .carousel-track { display: flex; transition: transform 0.5s ease; }
-  .carousel-slide { min-width: 60%; margin: 0 2%; box-sizing: border-box; transition: transform 0.5s, opacity 0.5s; opacity: 0.4; transform: scale(0.8); cursor: pointer; }
+  .carousel-slide { min-width: 50%; margin: 0 2%; box-sizing: border-box; transition: transform 0.5s, opacity 0.5s; opacity: 0.4; transform: scale(0.8); cursor: pointer; }
+  #certs-carousel .carousel-slide { min-width: 25%; }
   .carousel-slide.is-selected { opacity: 1; transform: scale(1); }
   .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(128,128,128,0.2); border: 1px solid var(--border-color); color: var(--text-color); border-radius: 50%; width: 50px; height: 50px; cursor: pointer; z-index: 10; font-size: 24px; display: flex; align-items: center; justify-content: center; }
-  .carousel-button:hover { background: rgba(128,128,128,0.4); }
   .carousel-button--left { left: 0; }
   .carousel-button--right { right: 0; }
   
   .project-slide { position: relative; border-radius: 16px; overflow: hidden; min-height: 450px; background-size: cover; background-position: center; color: #fff; }
   .project-slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%); }
   .project-content { position: absolute; bottom: 0; left: 0; padding: 2rem; z-index: 2; }
-  .project-content h3 { margin: 0 0 0.5rem 0; font-size: 1.8rem; }
   
-  #certifications.section { padding: 8rem 0; width: 100%; box-sizing: border-box; }
-  .marquee { width: 100vw; max-width: 100%; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); }
-  .marquee-track { display: flex; width: fit-content; animation: marquee 40s linear infinite; }
-  .marquee:hover .marquee-track { animation-play-state: paused; }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .cert-item { flex-shrink: 0; width: 300px; padding: 2rem; text-align: center; cursor: pointer; transition: transform 0.3s ease; }
-  .cert-item:hover { transform: scale(1.1); }
-  .cert-item i { font-size: 60px; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .cert-slide { min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cert-slide i { font-size: 60px; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   
-  .hidden { opacity: 0; transition: opacity 1s ease-out; }
-  .show { opacity: 1; }
+  .hidden { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+  .show { opacity: 1; transform: translateY(0); }
   .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
   .modal-content { background-color: var(--bg-color); border: 1px solid var(--border-color); margin: 5% auto; padding: 2rem; width: 80%; max-width: 900px; position: relative; border-radius: 8px; }
-  .modal-content img { width: 100%; }
-  .close-button { color: #aaaaaa; position: absolute; top: 1rem; right: 1.5rem; font-size: 2.5rem; font-weight: bold; cursor: pointer; }
 </style>
 
 <div class="cursor-spotlight"></div>
@@ -137,8 +142,9 @@ title: Tanishk Manoj Mestry - Portfolio
   </label>
 </header>
 
-<main>
-  <section id="welcome" class="section">
+<div class="main-container" id="main-container">
+
+  <section id="welcome" class="slide">
     <div class="content-wrapper">
       <h1 class="typing-effect hidden" id="typing-text"></h1>
       <h3 class="hidden">Applied Statistics and Data Analytics student with strong skills in data analysis, statistical modelling, and visualization.</h3>
@@ -150,7 +156,7 @@ title: Tanishk Manoj Mestry - Portfolio
     </div>
   </section>
 
-  <section id="skills" class="section">
+  <section id="skills" class="slide">
     <div class="content-wrapper">
       <h2 class="section-title hidden">Technical Skills</h2>
       <div class="skills-container hidden">
@@ -166,7 +172,7 @@ title: Tanishk Manoj Mestry - Portfolio
     </div>
   </section>
 
-  <section id="projects" class="section">
+  <section id="projects" class="slide">
     <div class="carousel hidden" id="projects-carousel">
         <div class="carousel-viewport"><div class="carousel-track"></div></div>
         <button class="carousel-button carousel-button--left"><i class='bx bx-chevron-left'></i></button>
@@ -174,7 +180,7 @@ title: Tanishk Manoj Mestry - Portfolio
     </div>
   </section>
 
-  <section id="certifications" class="section">
+  <section id="certifications" class="slide">
     <div class="content-wrapper"><h2 class="section-title hidden">Certifications</h2></div>
     <div class="marquee hidden">
         <div class="marquee-track">
@@ -190,7 +196,7 @@ title: Tanishk Manoj Mestry - Portfolio
     </div>
   </section>
 
-  <section id="experience" class="section">
+  <section id="experience" class="slide">
     <div class="content-wrapper">
         <h2 class="section-title hidden">Work Experience</h2>
         <div class="hidden">
@@ -200,13 +206,13 @@ title: Tanishk Manoj Mestry - Portfolio
     </div>
   </section>
 
-  <section id="education" class="section">
+  <section id="education" class="slide">
     <div class="content-wrapper">
         <h2 class="section-title hidden">Education</h2>
         <div class="hidden">
             <h3>SVKM's Mithibai College (Expected: April 2026)</h3>
             <p>B.Sc. in Applied Statistics & Data Analytics</p>
-            <h3>ITVEDANT (Jan 2025)</h3>
+            <h3 style="margin-top: 2rem;">ITVEDANT (Jan 2025)</h3>
             <p>Master in Data Science & Analytics with Artificial Intelligence</p>
         </div>
     </div>
@@ -223,25 +229,27 @@ title: Tanishk Manoj Mestry - Portfolio
 <div id="itvedant-powerbi-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('itvedant-powerbi-modal')">&times;</span><img src="images/placeholder.png" alt="ITVEDANT Power BI Certificate"></div></div>
 
 <script>
-  // --- SCRIPT START ---
-  document.addEventListener('DOMContentLoaded', () => {
-
+document.addEventListener('DOMContentLoaded', () => {
     // --- Cursor Spotlight ---
     const spotlight = document.querySelector('.cursor-spotlight');
-    document.addEventListener('mousemove', (e) => {
-      spotlight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    });
+    if (spotlight) {
+        document.addEventListener('mousemove', (e) => {
+            spotlight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+    }
 
     // --- Theme Toggle ---
     const toggleCheckbox = document.getElementById('checkbox');
     function setTheme(isLight) {
         document.body.classList.toggle('light-theme', isLight);
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        toggleCheckbox.checked = isLight;
+        if(toggleCheckbox) toggleCheckbox.checked = isLight;
     }
-    toggleCheckbox.addEventListener('change', () => setTheme(toggleCheckbox.checked));
-    const savedTheme = localStorage.getItem('theme');
-    setTheme(savedTheme === 'light');
+    if(toggleCheckbox) {
+        toggleCheckbox.addEventListener('change', () => setTheme(toggleCheckbox.checked));
+        const savedTheme = localStorage.getItem('theme');
+        setTheme(savedTheme === 'light');
+    }
 
     // --- Typing Effect ---
     const typingElement = document.getElementById('typing-text');
@@ -254,7 +262,7 @@ title: Tanishk Manoj Mestry - Portfolio
             setTimeout(typeWriter, 120);
         }
     }
-    setTimeout(typeWriter, 500);
+    if(typingElement) setTimeout(typeWriter, 500);
 
     // --- Scroll Animations ---
     const observer = new IntersectionObserver((entries) => {
@@ -270,6 +278,7 @@ title: Tanishk Manoj Mestry - Portfolio
     // --- Carousel Class ---
     class Carousel {
         constructor(carouselElement, data, slideGenerator) {
+            if (!carouselElement) return;
             this.track = carouselElement.querySelector('.carousel-track');
             this.prevButton = carouselElement.querySelector('.carousel-button--left');
             this.nextButton = carouselElement.querySelector('.carousel-button--right');
@@ -278,56 +287,38 @@ title: Tanishk Manoj Mestry - Portfolio
             this.slideGenerator = slideGenerator;
             this.currentIndex = 0;
             this.slideWidth = 0;
-
             this.init();
         }
-
         init() {
-            // Clone for infinite effect
             const extendedData = [...this.data, ...this.data, ...this.data];
             this.track.innerHTML = extendedData.map(this.slideGenerator).join('');
             this.slides = Array.from(this.track.children);
-            
-            this.currentIndex = this.data.length; // Start on the first "real" slide
-            
-            // Wait for images to load to calculate width correctly
+            this.currentIndex = this.data.length;
             this.resizeObserver = new ResizeObserver(() => this.calculatePositions());
-            this.resizeObserver.observe(this.track);
-            
+            this.resizeObserver.observe(document.body);
             this.attachEventListeners();
         }
-        
         calculatePositions() {
-            this.slideWidth = this.slides[0].getBoundingClientRect().width;
+            if (this.slides.length === 0) return;
+            this.slideWidth = this.slides[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(this.slides[0]).marginLeft) + parseFloat(getComputedStyle(this.slides[0]).marginRight));
             this.track.style.transition = 'none';
             this.track.style.transform = `translateX(-${this.currentIndex * this.slideWidth}px)`;
-            this.updateClasses();
+            setTimeout(() => { this.updateClasses(); }, 50);
         }
-
         moveTo(index) {
             this.track.style.transition = 'transform 0.5s ease';
             this.track.style.transform = `translateX(-${index * this.slideWidth}px)`;
             this.currentIndex = index;
             this.updateClasses();
         }
-
         updateClasses() {
             this.slides.forEach((slide, i) => {
-                slide.classList.remove('is-selected');
-                // The modulo helps map cloned slides to original data for styling
-                if (i === this.currentIndex) {
-                    slide.classList.add('is-selected');
-                }
+                slide.classList.toggle('is-selected', i === this.currentIndex);
             });
         }
-
         attachEventListeners() {
-            this.prevButton.addEventListener('click', () => {
-                this.moveTo(this.currentIndex - 1);
-            });
-            this.nextButton.addEventListener('click', () => {
-                this.moveTo(this.currentIndex + 1);
-            });
+            this.prevButton.addEventListener('click', () => this.moveTo(this.currentIndex - 1));
+            this.nextButton.addEventListener('click', () => this.moveTo(this.currentIndex + 1));
             this.track.addEventListener('transitionend', () => {
                 if (this.currentIndex < this.data.length) {
                     this.currentIndex += this.data.length;
@@ -352,19 +343,32 @@ title: Tanishk Manoj Mestry - Portfolio
     ];
 
     const projectsCarouselEl = document.getElementById('projects-carousel');
-    const projectSlideGenerator = item => `
-        <div class="carousel-slide project-slide" style="background-image: url('${item.bg}');" onclick="openModal('${item.id}')">
-            <div class="project-content">
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
-            </div>
-        </div>`;
+    const projectSlideGenerator = item => `<div class="carousel-slide project-slide" style="background-image: url('${item.bg}');" onclick="openModal('${item.id}')"><div class="project-content"><h3>${item.title}</h3><p>${item.desc}</p></div></div>`;
     new Carousel(projectsCarouselEl, projectData, projectSlideGenerator);
-  });
-  
-  // --- Modal Functions (Global Scope) ---
-  function openModal(modalId) { document.getElementById(modalId).style.display = "block"; }
-  function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-  window.onclick = function(event) { if (event.target.classList.contains('modal')) { event.target.style.display = "none"; } }
 
+    // --- Side Navigation for Slides ---
+    const mainContainer = document.getElementById('main-container');
+    const slideSections = document.querySelectorAll('.slide');
+    const navLinks = document.querySelectorAll("#page-nav a");
+
+    const slideObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+                navLinks.forEach(a => {
+                    a.classList.remove("active");
+                    if (a.getAttribute('href') === `#${sectionId}`) {
+                        a.classList.add("active");
+                    }
+                });
+            }
+        });
+    }, { root: mainContainer, threshold: 0.6 });
+
+    slideSections.forEach(section => slideObserver.observe(section));
+});
+  
+function openModal(modalId) { document.getElementById(modalId).style.display = "block"; }
+function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+window.onclick = function(event) { if (event.target.classList.contains('modal')) { event.target.style.display = "none"; } }
 </script>
