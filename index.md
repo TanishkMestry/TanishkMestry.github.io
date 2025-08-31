@@ -8,25 +8,30 @@ title: Tanishk Manoj Mestry - Portfolio
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
 
-  /* Light & Dark Theme Variables */
+  /* Global Theme Variables - Inspired by your image */
   :root {
-    --primary-color: #39ff14; /* Neon Green */
-    --glow-color: #39ff14;
-    --bg-color: #0a0a0a;
-    --card-bg: #1a1a1a;
+    --primary-color: #8a2be2; /* BlueViolet */
+    --glow-color: #8a2be2;
+    --bg-color: #11111a; /* Dark background */
+    --card-bg: #222233; /* Slightly lighter for sections/cards */
     --text-color: #e0e0e0;
-    --border-color: #333;
-    --subtle-text: #aaa;
+    --border-color: #444455;
+    --subtle-text: #aaaaaa;
+    --grid-bg-color: #1a1a2e; /* Darker for the grid */
+    --grid-line-color: #2a2a4a; /* Very subtle grid lines */
   }
 
+  /* Light Theme Adaptation */
   body.light-theme {
-    --primary-color: #006400; /* Dark Green for contrast */
-    --glow-color: #006400;
+    --primary-color: #483d8b; /* DarkSlateBlue */
+    --glow-color: #483d8b;
     --bg-color: #f5f5f5;
     --card-bg: #ffffff;
     --text-color: #1c1c1c;
-    --border-color: #ddd;
-    --subtle-text: #555;
+    --border-color: #dddddd;
+    --subtle-text: #555555;
+    --grid-bg-color: #eeeeee;
+    --grid-line-color: #cccccc;
   }
   
   body {
@@ -37,18 +42,24 @@ title: Tanishk Manoj Mestry - Portfolio
     padding: 0;
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
+    /* Subtle grid background pattern */
+    background-image: linear-gradient(0deg, var(--grid-line-color) 1px, transparent 1px), 
+                      linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
+    background-size: 30px 30px; /* Adjust grid size */
+    background-color: var(--grid-bg-color); /* Base for the grid */
   }
-  
-  /* CORRECTED: This wrapper now only provides side padding. No max-width. */
+
   .content-wrapper {
-      padding: 0 2rem; /* Keeps content from touching the absolute screen edges */
+      padding: 0 4rem; /* Generous side padding for content */
+      margin: 0 auto; /* Keep content centered in its padded area */
   }
 
   /* --- Header --- */
   .header {
     text-align: center;
-    padding: 4rem 0; /* Vertical padding */
+    padding: 4rem 0;
     position: relative;
+    background-color: transparent; /* Ensure header background is grid */
   }
   
   .typing-effect {
@@ -78,14 +89,20 @@ title: Tanishk Manoj Mestry - Portfolio
     font-size: 1.5rem;
     transition: color 0.3s ease, text-shadow 0.3s ease;
   }
+  .social-links a:hover {
+    text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+  }
 
   /* --- Section Styling --- */
   .section {
-    padding: 4rem 0; /* Vertical padding, NO horizontal padding */
+    padding: 4rem 0;
     border-bottom: 1px solid var(--border-color);
+    background-color: transparent; /* Ensure sections also show grid by default */
   }
   .section:nth-of-type(2n) {
-      background-color: var(--card-bg); /* Alternating section background color */
+      background-color: var(--card-bg); /* Use card_bg for alternating sections */
+      /* Override grid for alternating sections if desired, or keep grid */
+      background-image: none; /* Remove grid from these sections for contrast */
   }
 
   .section h2 {
@@ -97,34 +114,62 @@ title: Tanishk Manoj Mestry - Portfolio
     text-align: center;
   }
 
-  /* --- Skills Grid --- */
+  /* --- Technical Skills Section Styling (matching image) --- */
+  #skills.section {
+    background-color: var(--bg-color); /* Ensure skills section has the main grid background */
+    background-image: linear-gradient(0deg, var(--grid-line-color) 1px, transparent 1px), 
+                      linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
   .skills-grid {
     display: grid;
-    /* This will create as many columns as can fit, filling the space */
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1.5rem;
   }
   .skill-item {
-    background-color: var(--bg-color);
+    background-color: var(--card-bg); /* Use card_bg for the skill item boxes */
     text-align: center;
     padding: 1.5rem 1rem;
     border-radius: 8px;
     font-weight: bold;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
     border: 1px solid var(--border-color);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5); /* Inner shadow for depth */
   }
   .skill-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px var(--glow-color);
+    box-shadow: 0 0 25px rgba(var(--glow-color-rgb), 0.7), 0 0 10px var(--glow-color); /* Stronger glow */
     border-color: var(--glow-color);
   }
-  .skill-item .skill-icon { font-size: 50px; color: var(--primary-color); }
-  
+  .skill-item .skill-icon {
+    font-size: 50px;
+    color: #ffffff; /* Icon base color is white */
+    /* Multi-layered drop shadow for deep glow, inspired by your image */
+    filter: drop-shadow(0 0 3px var(--glow-color)) /* Inner glow */
+            drop-shadow(0 0 8px rgba(138, 43, 226, 0.6)) /* Outer glow */
+            drop-shadow(0 0 15px rgba(138, 43, 226, 0.4)); /* Even wider subtle glow */
+    transition: filter 0.3s ease;
+  }
+  .skill-item:hover .skill-icon {
+    filter: drop-shadow(0 0 5px var(--glow-color))
+            drop-shadow(0 0 12px rgba(138, 43, 226, 0.8))
+            drop-shadow(0 0 20px rgba(138, 43, 226, 0.6));
+  }
+  /* Define RGB values for the glow color for rgba() usage */
+  :root {
+      --glow-color-rgb: 138, 43, 226; /* For BlueViolet */
+  }
+  body.light-theme {
+      --glow-color-rgb: 72, 61, 139; /* For DarkSlateBlue */
+  }
+
+
   /* --- Projects Grid --- */
   .projects-grid {
     display: grid;
@@ -137,14 +182,15 @@ title: Tanishk Manoj Mestry - Portfolio
     border-radius: 8px;
     padding: 1.5rem;
     transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
   }
   .project-card:hover { transform: scale(1.03); border-color: var(--primary-color); }
   .project-card h3 { margin-top: 0; color: var(--primary-color); }
   .project-card .tech-tag { background-color: var(--primary-color); color: var(--bg-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
   
   /* --- Experience & Education --- */
-  details { margin-bottom: 1rem; border-left: 3px solid var(--border-color); padding-left: 15px; }
-  summary { cursor: pointer; font-weight: bold; font-size: 1.1rem; outline: none; }
+  details { margin-bottom: 1rem; border-left: 3px solid var(--primary-color); padding-left: 15px; }
+  summary { cursor: pointer; font-weight: bold; font-size: 1.1rem; outline: none; color: var(--text-color); }
   summary:hover { color: var(--primary-color); }
   .job-title, .degree-title { font-style: italic; color: var(--subtle-text); }
   
@@ -156,13 +202,34 @@ title: Tanishk Manoj Mestry - Portfolio
     position: absolute;
     top: 1rem;
     right: 2rem;
+    z-index: 10; /* Ensure toggle is always on top */
   }
   .theme-switch { display: inline-block; height: 34px; position: relative; width: 60px; }
   .theme-switch input { display:none; }
-  .slider { background-color: #333; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; }
+  .slider { background-color: #555; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; }
   .slider:before { background-color: #fff; bottom: 4px; content: ""; height: 26px; left: 4px; position: absolute; transition: .4s; width: 26px; border-radius: 50%; }
-  input:checked + .slider { background-color: var(--primary-color); }
+  input:checked + .slider { background-color: var(--primary-color); } /* Light theme toggle color */
   input:checked + .slider:before { transform: translateX(26px); }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+      .content-wrapper {
+          padding: 0 1rem;
+      }
+      .header {
+          padding: 3rem 0;
+      }
+      .section {
+          padding: 3rem 0;
+      }
+      .typing-effect {
+          font-size: 1.8rem;
+      }
+      .theme-switch-wrapper {
+          right: 1rem;
+      }
+  }
+
 </style>
 
 <header class="header">
