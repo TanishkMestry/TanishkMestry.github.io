@@ -142,7 +142,7 @@
   <section id="welcome" class="slide">
     <div class="content-wrapper">
       <h1 class="typing-effect hidden" id="typing-text"></h1>
-      <h3 class="hidden">Applied Statistics and Data Analytics student with strong skills in data analysis, statistical modelling, and visualization.</h3>
+      <h3 class="hidden">Applied Statistics and Data Analytics student with strong skills in Data Analysis and Visualization.</h3>
       <div class="social-links hidden">
         <a href="mailto:tanishkmestry4183@gmail.com" target="_blank" title="Email"><i class='bx bx-envelope'></i></a>
         <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_URL" target="_blank" title="LinkedIn"><i class='bx bxl-linkedin-square'></i></a>
