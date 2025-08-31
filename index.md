@@ -3,293 +3,282 @@ layout: default
 title: Tanishk Manoj Mestry - Portfolio
 ---
 
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
 
+  /* Global Theme Variables */
   :root {
-    --bg-color: #0a0a0a;
-    --primary-color: #00ffff; /* Cyan / Aqua */
+    --primary-color: #8a2be2;
+    --glow-color: #8a2be2;
+    --bg-color: #11111a;
+    --sidebar-bg: #1a1a2e; /* A distinct background for the sidebar */
+    --content-bg: #11111a;
+    --card-bg: #222233;
     --text-color: #e0e0e0;
-    --card-bg: #1a1a1a;
-    --border-color: #333;
+    --border-color: #444455;
+    --grid-line-color: #2a2a4a;
   }
 
+  body.light-theme {
+    --primary-color: #483d8b;
+    --glow-color: #483d8b;
+    --bg-color: #f5f5f5;
+    --sidebar-bg: #e0e0eb;
+    --content-bg: #f5f5f5;
+    --card-bg: #ffffff;
+    --text-color: #1c1c1c;
+    --border-color: #dddddd;
+    --grid-line-color: #cccccc;
+  }
+  
   body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Roboto Mono', monospace;
-    margin: 0;
-    padding: 2rem;
-    line-height: 1.6;
+    margin: 0; padding: 0;
+    display: flex; /* Key for two-column layout */
+    transition: background-color 0.3s, color 0.3s;
   }
 
-  .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 1rem;
-  }
-
-  /* --- Header & Typing Animation --- */
-  .header {
+  /* --- NEW: Sidebar Styling --- */
+  .sidebar {
+    width: 380px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    z-index: 10;
+  }
+  .sidebar h1 { font-size: 2.2rem; color: var(--primary-color); margin: 0; }
+  .sidebar h2 { font-size: 1rem; font-weight: 300; margin: 0.5rem 0 2rem 0; }
+  .sidebar .social-links a { font-size: 1.8rem; margin: 0 1rem; color: var(--text-color); }
+  .sidebar .social-links a:hover { color: var(--primary-color); }
+
+  /* --- NEW: Main Content Area Styling --- */
+  .main-content {
+    margin-left: 380px; /* Offset by sidebar width */
+    width: calc(100% - 380px);
+    padding: 4rem;
+    box-sizing: border-box;
+    /* Grid background for the content area */
+    background-image: linear-gradient(0deg, var(--grid-line-color) 1px, transparent 1px), 
+                      linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-color: var(--content-bg);
+  }
+
+  .section {
     margin-bottom: 4rem;
   }
-
-  .typing-effect {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    border-right: 2px solid var(--primary-color);
-    white-space: nowrap;
-    overflow: hidden;
-    margin: 0 auto;
-    animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
-  }
-
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-
-  @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: var(--primary-color); }
-  }
-
-  .header h2 {
-    font-size: 1.2rem;
-    color: var(--text-color);
-    margin-top: 0.5rem;
-    font-weight: 300;
-  }
-
-  .social-links a {
-    color: var(--primary-color);
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1.5rem;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-  }
-
-  .social-links a:hover {
-    color: #fff;
-    text-shadow: 0 0 10px var(--primary-color);
-  }
-  
-  /* --- Section Styling --- */
-  .section {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
-  }
-
   .section h2 {
     color: var(--primary-color);
     border-bottom: 2px solid var(--primary-color);
     padding-bottom: 10px;
     margin-top: 0;
+    margin-bottom: 2rem;
+    text-align: left;
   }
 
-  /* --- Skills Grid --- */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-  }
-
-  .skill-item {
-    background-color: #252525;
-    text-align: center;
-    padding: 1rem;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .skill-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 10px var(--primary-color);
-  }
-
-  /* --- Projects Grid --- */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .project-card {
-    background-color: #252525;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-  }
+  /* --- Re-styled elements for the new layout --- */
+  .skills-grid, .certifications-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; }
+  .skill-item, .certification-item { background-color: var(--card-bg); /* ... rest of styling is similar ... */ }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card { background-color: var(--card-bg); /* ... rest of styling is similar ... */ }
   
-  .project-card:hover {
-      transform: scale(1.03);
-      border-color: var(--primary-color);
-  }
-
-  .project-card h3 {
-    margin-top: 0;
-    color: var(--primary-color);
-  }
+  /* --- Theme Toggle in Sidebar --- */
+  .theme-switch-wrapper { position: absolute; top: 1.5rem; right: 1.5rem; }
+  /* All other styles (modals, cards, etc.) remain largely the same */
+  .skill-item:hover, .certification-item:hover { transform: translateY(-5px); box-shadow: 0 0 25px rgba(var(--glow-color-rgb), 0.7), 0 0 10px var(--glow-color); border-color: var(--glow-color); }
+  .skill-item .skill-icon { font-size: 50px; color: #ffffff; /* ... glow filter from before ... */ }
+  .certification-item { cursor: pointer; }
+  .project-card { cursor: pointer; }
   
-  .project-card .tech-tag {
-      background-color: var(--primary-color);
-      color: var(--bg-color);
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      font-weight: bold;
+  /* --- NEW: Responsive Design for smaller screens --- */
+  @media (max-width: 1024px) {
+    body {
+      flex-direction: column;
+    }
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .main-content {
+      margin-left: 0;
+      width: 100%;
+      padding: 2rem;
+    }
   }
 
-  /* --- Experience & Education --- */
-  details {
-    margin-bottom: 1rem;
-    border-left: 3px solid var(--border-color);
-    padding-left: 15px;
-  }
-
-  summary {
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.1rem;
-    outline: none;
-  }
-  
-  summary:hover {
-      color: var(--primary-color);
-  }
-
-  .job-title, .degree-title {
-      font-style: italic;
-      color: #aaa;
-  }
-
-  /* --- Footer --- */
-  .footer {
-    text-align: center;
-    margin-top: 4rem;
-    color: #888;
-  }
-
+  /* (modal, card, and other detailed styles are included below for completeness) */
+  :root { --glow-color-rgb: 138, 43, 226; }
+  body.light-theme { --glow-color-rgb: 72, 61, 139; }
+  .skill-item, .certification-item { text-align: center; padding: 1.5rem 1rem; border-radius: 8px; font-weight: bold; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.8rem; border: 1px solid var(--border-color); box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+  .skill-item .skill-icon { filter: drop-shadow(0 0 3px var(--glow-color)) drop-shadow(0 0 8px rgba(138, 43, 226, 0.6)) drop-shadow(0 0 15px rgba(138, 43, 226, 0.4)); transition: filter 0.3s ease; }
+  .skill-item:hover .skill-icon { filter: drop-shadow(0 0 5px var(--glow-color)) drop-shadow(0 0 12px rgba(138, 43, 226, 0.8)) drop-shadow(0 0 20px rgba(138, 43, 226, 0.6)); }
+  .certification-item i { font-size: 50px; color: var(--primary-color); margin-bottom: 0.5rem; }
+  .project-card { border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; transition: transform 0.3s ease, border-color 0.3s ease; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+  .project-card:hover { transform: scale(1.03); border-color: var(--primary-color); }
+  .project-card h3 { margin-top: 0; color: var(--primary-color); }
+  .project-card .tech-tag { background-color: var(--primary-color); color: var(--sidebar-bg); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+  details { margin-bottom: 1rem; border-left: 3px solid var(--primary-color); padding-left: 15px; }
+  summary { cursor: pointer; font-weight: bold; font-size: 1.1rem; outline: none; color: var(--text-color); }
+  summary:hover { color: var(--primary-color); }
+  .job-title, .degree-title { font-style: italic; color: var(--text-color); opacity: 0.7; }
+  .theme-switch { display: inline-block; height: 34px; position: relative; width: 60px; }
+  .theme-switch input { display:none; }
+  .slider { background-color: #555; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; }
+  .slider:before { background-color: #fff; bottom: 4px; content: ""; height: 26px; left: 4px; position: absolute; transition: .4s; width: 26px; border-radius: 50%; }
+  input:checked + .slider { background-color: var(--primary-color); }
+  input:checked + .slider:before { transform: translateX(26px); }
+  .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+  .modal-content { background-color: var(--card-bg); margin: 5% auto; padding: 20px; border: 1px solid var(--border-color); width: 80%; max-width: 900px; position: relative; border-radius: 8px; animation: fadeIn 0.5s; }
+  @keyframes fadeIn { from {opacity: 0; transform: scale(0.9);} to {opacity: 1; transform: scale(1);} }
+  .modal-content img { width: 100%; border-radius: 4px; }
+  .close-button { color: #aaaaaa; position: absolute; top: 10px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; }
+  .close-button:hover, .close-button:focus { color: var(--primary-color); }
 </style>
 
-<div class="container">
+<div class="sidebar">
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox" />
+      <div class="slider round"></div>
+    </label>
+  </div>
+  
+  <h1>TANISHK MANOJ MESTRY</h1>
+  <h2>Applied Statistics & Data Analytics Student</h2>
+  
+  <div class="social-links">
+    <a href="mailto:tanishkmestry4183@gmail.com" target="_blank" title="Email"><i class='bx bx-envelope'></i></a>
+    <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_URL" target="_blank" title="LinkedIn"><i class='bx bxl-linkedin-square'></i></a>
+    <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
+  </div>
+</div>
 
-  <header class="header">
-    <h1 id="typing-text" class="typing-effect"></h1>
-    <h2>Applied Statistics & Data Analytics Student</h2>
-    <div class="social-links">
-      <a href="mailto:tanishkmestry4183@gmail.com" target="_blank" title="Email">📧</a>
-      <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_URL" target="_blank" title="LinkedIn">🔗</a>
-      <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" title="GitHub">💻</a>
-    </div>
-  </header>
-
-  <section id="summary" class="section">
-    <h2>// Summary</h2>
-    <p>
-      Applied Statistics and Data Analytics student with strong skills in data analysis, statistical modelling, and visualization. Proficient in Advanced Excel, SQL, Python, R, MATLAB, Tableau, and Power BI for data cleaning, reporting, and Interactive Dashboards. Eager to apply data-driven insights in academic, research, and business environments.
-    </p>
-  </section>
+<div class="main-content">
 
   <section id="skills" class="section">
-    <h2>// Technical Skills</h2>
+    <h2>Technical Skills</h2>
     <div class="skills-grid">
-      <div class="skill-item">Python</div>
-      <div class="skill-item">SQL</div>
-      <div class="skill-item">R</div>
-      <div class="skill-item">Tableau</div>
-      <div class="skill-item">Power BI</div>
-      <div class="skill-item">Advanced Excel</div>
-      <div class="skill-item">MATLAB</div>
-      <div class="skill-item">Machine Learning</div>
-      <div class="skill-item">Data Analysis</div>
-      <div class="skill-item">Data Visualization</div>
+      <div class="skill-item"><i class='bx bxl-python skill-icon'></i><span>Python</span></div>
+      <div class="skill-item"><i class='bx bx-data skill-icon'></i><span>SQL</span></div>
+      <div class="skill-item"><i class='bx bxs-bar-chart-alt-2 skill-icon'></i><span>Power BI</span></div>
+      <div class="skill-item"><i class='bx bxs-pie-chart-alt-2 skill-icon'></i><span>Tableau</span></div>
+      <div class="skill-item"><i class='bx bx-math skill-icon'></i><span>R</span></div>
+      <div class="skill-item"><i class='bx bxs-file-spreadsheet skill-icon'></i><span>Advanced Excel</span></div>
+      <div class="skill-item"><i class='bx bxs-chip skill-icon'></i><span>MATLAB</span></div>
+      <div class="skill-item"><i class='bx bx-brain skill-icon'></i><span>Machine Learning</span></div>
     </div>
   </section>
 
   <section id="projects" class="section">
-    <h2>// Projects</h2>
+    <h2>Projects</h2>
     <div class="projects-grid">
-      <div class="project-card">
-        <span class="tech-tag">Power BI</span>
-        <h3>Global YouTube Statistics</h3>
-        <p>Developed an interactive dashboard to evaluate channel performance, video views, and earnings, delivering actionable insights for content strategy.</p>
+      <div class="project-card" onclick="openModal('youtube-modal')">
+        <span class="tech-tag">Power BI</span><h3>Global YouTube Statistics</h3>
+        <p>Developed an interactive dashboard to evaluate channel performance, video views, and earnings.</p>
       </div>
-      <div class="project-card">
-        <span class="tech-tag">Excel</span>
-        <h3>Product Sales Analysis</h3>
-        <p>Designed an interactive dashboard to analyse product sales trends using advanced data cleaning and visualization techniques for performance tracking.</p>
+      <div class="project-card" onclick="openModal('sales-modal')">
+        <span class="tech-tag">Excel</span><h3>Product Sales Analysis</h3>
+        <p>Designed an interactive dashboard to analyse product sales trends for performance tracking.</p>
       </div>
-      <div class="project-card">
-        <span class="tech-tag">Tableau</span>
-        <h3>Video Game Sales Analysis</h3>
-        <p>Built a dynamic dashboard to analyze regional video game sales, identifying key trends and providing data-driven performance insights.</p>
+      <div class="project-card" onclick="openModal('game-modal')">
+        <span class="tech-tag">Tableau</span><h3>Video Game Sales Analysis</h3>
+        <p>Built a dynamic dashboard to analyze regional video game sales and identify key trends.</p>
       </div>
-      <div class="project-card">
-        <span class="tech-tag">SQL</span>
-        <h3>Library Management System</h3>
-        <p>Created a comprehensive system for managing book inventory, tracking member activities, and generating detailed analytical reports.</p>
+      <div class="project-card" onclick="openModal('library-modal')">
+        <span class="tech-tag">SQL</span><h3>Library Management System</h3>
+        <p>Created a comprehensive system for managing book inventory and tracking member activities.</p>
       </div>
     </div>
   </section>
 
+  <section id="certifications" class="section">
+    <h2>Certifications</h2>
+    <div class="certifications-grid">
+      <div class="certification-item" onclick="openModal('ibm-python-modal')"><i class='bx bxl-python'></i><span>IBM: Python for Data Science</span></div>
+      <div class="certification-item" onclick="openModal('ibm-ml-modal')"><i class='bx bx-brain'></i><span>IBM: Machine Learning</span></div>
+      <div class="certification-item" onclick="openModal('itvedant-sql-modal')"><i class='bx bx-data'></i><span>ITVEDANT: SQL</span></div>
+      <div class="certification-item" onclick="openModal('itvedant-powerbi-modal')"><i class='bx bxs-bar-chart-alt-2'></i><span>ITVEDANT: Power BI</span></div>
+    </div>
+  </section>
+
   <section id="experience" class="section">
-    <h2>// Work Experience</h2>
+    <h2>Work Experience</h2>
     <details>
       <summary>Bhoir & Patil Associates, Tax Consultants (Apr 2024 - Mar 2025)</summary>
       <p class="job-title">Accounts Assistant</p>
-      <ul>
-        <li>Managed and entered client financial data, including balance sheets, purchase and sales records, using Tally.</li>
-        <li>Prepared and analysed financial statements and maintained detailed creditor and debtor records in Excel.</li>
-        <li>Ensured tax compliance by generating accurate reports through GST software.</li>
-      </ul>
+      <ul><li>Managed and entered client financial data using Tally.</li><li>Prepared and analysed financial statements in Excel.</li><li>Ensured tax compliance by generating accurate reports through GST software.</li></ul>
     </details>
   </section>
 
   <section id="education" class="section">
-    <h2>// Education</h2>
+    <h2>Education</h2>
     <details>
       <summary>SVKM's Mithibai College (Expected: April 2026)</summary>
-      <p class="degree-title">B.Sc. in Applied Statistics & Data Analytics</p>
+      <p class="job-title">B.Sc. in Applied Statistics & Data Analytics</p>
     </details>
     <details>
       <summary>ITVEDANT (Jan 2025)</summary>
-      <p class="degree-title">Master in Data Science & Analytics with Artificial Intelligence</p>
+      <p class="job-title">Master in Data Science & Analytics with Artificial Intelligence</p>
     </details>
   </section>
-  
-  <footer class="footer">
-    <p>&copy; 2025 Tanishk Manoj Mestry. Built with passion and code.</p>
-  </footer>
 
 </div>
 
+<div id="youtube-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('youtube-modal')">&times;</span><h2>Global YouTube Statistics</h2><img src="images/placeholder.png" alt="YouTube Project Screenshot"><p>Here you can add a more detailed description of the project.</p></div></div>
+<div id="sales-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('sales-modal')">&times;</span><h2>Product Sales Analysis</h2><img src="images/placeholder.png" alt="Sales Project Screenshot"></div></div>
+<div id="game-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('game-modal')">&times;</span><h2>Video Game Sales Analysis</h2><img src="images/placeholder.png" alt="Game Project Screenshot"></div></div>
+<div id="library-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('library-modal')">&times;</span><h2>Library Management System</h2><img src="images/placeholder.png" alt="Library Project Screenshot"></div></div>
+<div id="ibm-python-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('ibm-python-modal')">&times;</span><img src="images/placeholder.png" alt="IBM Python Certificate"></div></div>
+<div id="ibm-ml-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('ibm-ml-modal')">&times;</span><img src="images/placeholder.png" alt="IBM Machine Learning Certificate"></div></div>
+<div id="itvedant-sql-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('itvedant-sql-modal')">&times;</span><img src="images/placeholder.png" alt="ITVEDANT SQL Certificate"></div></div>
+<div id="itvedant-powerbi-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('itvedant-powerbi-modal')">&times;</span><img src="images/placeholder.png" alt="ITVEDANT Power BI Certificate"></div></div>
+
 <script>
-  const textToType = "TANISHK MANOJ MESTRY";
-  const typingElement = document.getElementById('typing-text');
-  
-  // This function simulates the typing effect.
-  function typeEffect() {
-    typingElement.style.width = '0'; // Reset width
-    typingElement.textContent = textToType;
-    typingElement.style.animation = 'none'; // Reset animation
-    // A small delay to restart the animation properly
-    setTimeout(() => {
-      typingElement.style.animation = '';
-    }, 10);
+  // Theme Toggle Script
+  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme) {
+    document.body.classList.add(currentTheme);
+    if (currentTheme === 'light-theme') { toggleSwitch.checked = true; }
   }
-  
-  // Initial call
-  typeEffect();
-  
-  // Optional: Re-trigger the animation every 10 seconds
-  setInterval(typeEffect, 10000);
+  function switchTheme(e) {
+    if (e.target.checked) {
+      document.body.classList.add('light-theme');
+      localStorage.setItem('theme', 'light-theme');
+    } else {
+      document.body.classList.remove('light-theme');
+      localStorage.setItem('theme', 'dark-theme');
+    }    
+  }
+  toggleSwitch.addEventListener('change', switchTheme, false);
+
+  // Modal Control Script
+  function openModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+  }
+  function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+      event.target.style.display = "none";
+    }
+  }
 </script>
