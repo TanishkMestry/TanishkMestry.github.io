@@ -111,12 +111,11 @@ title: Tanishk Manoj Mestry - Portfolio
     border-color: var(--glow-color);
   }
 
-  /* MODIFIED: This now styles both <i> tags (Boxicons) and <svg> tags */
   .skill-item .skill-icon {
-    height: 50px; /* Controls height of all icons */
-    width: 50px;  /* Controls width of all icons */
-    font-size: 50px; /* Controls size of font-based icons */
-    color: #ffffff; /* Sets color for font-based icons */
+    height: 50px;
+    width: 50px;
+    font-size: 50px;
+    color: #ffffff;
     filter: drop-shadow(0 0 3px var(--glow-color)) drop-shadow(0 0 8px rgba(138, 43, 226, 0.6)) drop-shadow(0 0 15px rgba(138, 43, 226, 0.4));
     transition: filter 0.3s ease;
   }
@@ -178,7 +177,12 @@ title: Tanishk Manoj Mestry - Portfolio
         <div class="skill-item"><i class='bx bxl-python skill-icon'></i><span>Python</span></div>
         <div class="skill-item"><i class='bx bx-data skill-icon'></i><span>SQL</span></div>
         <div class="skill-item"><i class='bx bxs-bar-chart-alt-2 skill-icon'></i><span>Power BI</span></div>
-        <div class="skill-item"><i class='bx bxs-pie-chart-alt-2 skill-icon'></i><span>Tableau</span></div>
+        <div class="skill-item">
+          <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48">
+            <rect width="1.5" height="9" x="22.75" y="1" fill="#78909c"></rect><rect width="9" height="1.5" x="19" y="4.75" fill="#78909c"></rect><rect width="1.5" height="9" x="40.75" y="19" fill="#5c6bc0"></rect><rect width="9" height="1.5" x="37" y="22.75" fill="#5c6bc0"></rect><rect width="1.5" height="9" x="4.75" y="19" fill="#78909c"></rect><rect width="9" height="1.5" x="1" y="22.75" fill="#78909c"></rect><rect width="1.5" height="9" x="22.75" y="37" fill="#5c6bc0"></rect><rect width="9" height="1.5" x="19" y="40.75" fill="#5c6bc0"></rect><rect width="17" height="3" x="15" y="22" fill="#e8762d"></rect><rect width="3" height="17" x="22" y="15" fill="#e8762d"></rect><rect width="2" height="14" x="11" y="6" fill="#ffa000"></rect><rect width="14" height="2" x="5" y="12" fill="#ffa000"></rect><rect width="2" height="14" x="34" y="6" fill="#607d8b"></rect><rect width="14" height="2" x="28" y="12" fill="#607d8b"></rect><rect width="2" height="14" x="11" y="27" fill="#c62828"></rect><rect width="14" height="2" x="5" y="33" fill="#c62828"></rect><rect width="2" height="14" x="34" y="27" fill="#0d47a1"></rect><rect width="14" height="2" x="28" y="33" fill="#0d47a1"></rect>
+          </svg>
+          <span>Tableau</span>
+        </div>
         <div class="skill-item"><i class='bx bx-math skill-icon'></i><span>R</span></div>
         <div class="skill-item">
           <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48">
