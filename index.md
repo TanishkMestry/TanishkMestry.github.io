@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tanishk Mestry - Portfolio
+title: Tanishk Manoj Mestry - Portfolio
 ---
 
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -28,21 +28,28 @@ title: Tanishk Mestry - Portfolio
   
   html { scroll-behavior: smooth; }
   body {
-    background: linear-gradient(135deg, var(--color-1), var(--color-2), var(--color-3), var(--color-4));
-    background-size: 400% 400%;
-    animation: gradientAnimation 20s ease infinite;
+    background: var(--bg-color);
     color: var(--text-color);
     font-family: 'Roboto Mono', monospace;
     margin: 0; padding: 0;
-    transition: background-color 0.5s;
+    transition: background-color 0.5s, color 0.5s;
     overflow-x: hidden;
   }
 
-  @keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  .cursor-spotlight {
+    position: fixed;
+    top: 0; left: 0;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--color-2) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(100px);
+    opacity: 0.2;
+    transition: transform 0.1s ease-out;
   }
+  body.light-theme .cursor-spotlight { opacity: 0.4; }
 
   .main-header {
     position: fixed;
@@ -67,8 +74,8 @@ title: Tanishk Mestry - Portfolio
     padding: 0 4rem; /* Side padding to prevent content touching screen edges */
     box-sizing: border-box;
   }
-  .section { padding: 8rem 0; border-bottom: 1px solid var(--border-color); }
-  .section:last-child { border-bottom: none; }
+
+  .section { padding: 8rem 0; }
   .section-title { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 4rem; text-align: center; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   
   #welcome {
@@ -76,38 +83,48 @@ title: Tanishk Mestry - Portfolio
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-bottom: 1px solid var(--border-color);
   }
-  #welcome h1 { font-size: clamp(2.5rem, 7vw, 5rem); margin: 0; line-height: 1.1; white-space: nowrap; }
+  #welcome h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); margin: 0; line-height: 1.1; white-space: nowrap; }
   #welcome .typing-effect { border-right: 4px solid var(--text-color); animation: blink-caret .75s step-end infinite; padding-right: 2px; }
   @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--text-color); } }
-  #welcome h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 300; margin: 1.5rem 0 2.5rem 0; color: var(--text-muted); }
+  #welcome h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 300; margin: 1.5rem 0 2.5rem 0; max-width: 800px; color: var(--text-muted); }
   #welcome .social-links a { font-size: 2rem; margin-right: 1.5rem; color: var(--text-muted); transition: color 0.3s; }
   
   .skills-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem 3rem; }
   .skill-item { text-align: center; transition: transform 0.3s ease; }
+  .skill-item:hover { transform: scale(1.1); }
   .skill-item .skill-icon { height: 60px; width: 60px; margin-bottom: 1rem; }
+  .skill-item span { font-weight: bold; }
+
+  /* --- Seamless Carousels & Marquees --- */
+  .carousel { position: relative; padding: 2rem 0; }
+  .carousel-viewport { overflow: hidden; }
+  .carousel-track { display: flex; transition: transform 0.5s ease; }
+  .carousel-slide { min-width: 45%; margin: 0 1%; box-sizing: border-box; transition: transform 0.5s, opacity 0.5s; opacity: 0.4; transform: scale(0.85); cursor: pointer; }
+  .carousel-slide.is-selected { opacity: 1; transform: scale(1); }
+  .carousel-button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(128,128,128,0.2); border: 1px solid var(--border-color); color: var(--text-color); border-radius: 50%; width: 50px; height: 50px; cursor: pointer; z-index: 10; font-size: 24px; display: flex; align-items: center; justify-content: center; }
+  .carousel-button--left { left: 2rem; }
+  .carousel-button--right { right: 2rem; }
   
-  .marquee { width: 100vw; max-width: 100%; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent); mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent); }
-  .marquee-track { display: flex; width: fit-content; animation: marquee 60s linear infinite; }
-  .marquee:hover .marquee-track { animation-play-state: paused; }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  
-  .project-item {
-    flex-shrink: 0;
-    width: 500px;
-    padding: 0 1rem;
-    transition: transform 0.3s ease;
-  }
-  .project-item:hover { transform: scale(1.05); }
-  .project-card { position: relative; border-radius: 16px; overflow: hidden; cursor: pointer; min-height: 450px; background-size: cover; background-position: center; color: #fff; }
-  .project-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%); }
+  .project-slide { position: relative; border-radius: 16px; overflow: hidden; min-height: 450px; background-size: cover; background-position: center; color: #fff; }
+  .project-slide::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%); }
   .project-content { position: absolute; bottom: 0; left: 0; padding: 2rem; z-index: 2; }
   
+  #certifications.section { padding: 8rem 0; width: 100%; }
+  .marquee { width: 100vw; max-width: 100%; overflow: hidden; position: relative; -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); }
+  .marquee-track { display: flex; width: fit-content; animation: marquee 40s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .cert-item { flex-shrink: 0; width: 300px; padding: 2rem; text-align: center; cursor: pointer; transition: transform 0.3s ease; }
+  .cert-item:hover { transform: scale(1.1); }
   .cert-item i { font-size: 60px; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   
-  .timeline-item { text-align: left; margin-bottom: 2rem; border-left: 3px solid var(--border-color); padding-left: 1.5rem; }
-  .timeline-item h3 { font-size: 1.2rem; margin: 0; }
+  .timeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; text-align: left; }
+  .timeline-column h3 { font-size: 1.5rem; color: var(--text-muted); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
+  .timeline-item { margin-bottom: 2rem; }
+  .timeline-item h4 { font-size: 1.1rem; margin: 0; }
+  .timeline-item p { margin: 0.25rem 0 0 0; color: var(--text-muted); }
   
   .hidden { opacity: 0; transition: opacity 1s ease-out, transform 0.6s ease-out; transform: translateY(30px); }
   .show { opacity: 1; transform: translateY(0); }
@@ -116,6 +133,11 @@ title: Tanishk Mestry - Portfolio
   .modal-content { background-color: var(--bg-color); border: 1px solid var(--border-color); margin: 5% auto; padding: 2rem; width: 80%; max-width: 900px; position: relative; border-radius: 8px; }
   .modal-content img { width: 100%; }
   .close-button { color: #aaaaaa; position: absolute; top: 1rem; right: 1.5rem; font-size: 2.5rem; font-weight: bold; cursor: pointer; }
+
+  @media (max-width: 768px) {
+    .content-wrapper { padding: 0 1rem; }
+    .timeline-grid { grid-template-columns: 1fr; }
+  }
 </style>
 
 <div class="cursor-spotlight"></div>
@@ -146,7 +168,7 @@ title: Tanishk Mestry - Portfolio
     <div class="content-wrapper">
       <h2 class="section-title hidden">Technical Skills</h2>
       <div class="skills-container hidden">
-        <div class="skill-item"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48"><linearGradient id="python-gr1" x1="10.458" x2="26.314" y1="12.972" y2="26.277" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#26abe7"></stop><stop offset="1" stop-color="#086dbf"></stop></linearGradient><path fill="url(#python-gr1)" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2 H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104 c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672 C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498 c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><linearGradient id="python-gr2" x1="35.334" x2="23.517" y1="37.911" y2="21.034" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#feb705"></stop><stop offset="1" stop-color="#ffda1c"></stop></linearGradient><path fill="url(#python-gr2)" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549-2.077,4.549-4.67V34h-9v-2 h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104 c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5,4.377v8.586c0,2.439,1.759,4.263,4.218,4.672 C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5,1.498 c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path></svg><span>Python</span></div>
+        <div class="skill-item"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48"><linearGradient id="python-gr1" x1="10.458" x2="26.314" y1="12.972" y2="26.277" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#26abe7"></stop><stop offset="1" stop-color="#086dbf"></stop></linearGradient><path fill="url(#python-gr1)" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2 H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104 c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672 C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498 c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><linearGradient id="python-gr2" x1="35.334" x2="23.517" y1="37.911" y2="21.034" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#feb705"></stop><stop offset="1" stop-color="#ffda1c"></stop></linearGradient><path fill="url(#python-gr2)" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549-2.077,4.549-4.67V34h-9v-2 h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826,3.417-0.863,5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104 c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5,4.377v8.586c0,2.439,1.759,4.263,4.218,4.672 C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5,1.498 c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path></svg><span>Python</span></div>
         <div class="skill-item"><i class='bx bx-data skill-icon'></i><span>SQL</span></div>
         <div class="skill-item"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48"><linearGradient id="powerbi-gr1" x1="32" x2="32" y1="3.947" y2="44.751" gradientUnits="userSpaceOnUse"><stop offset=".006" stop-color="#ebb112"></stop><stop offset="1" stop-color="#bb5c17"></stop></linearGradient><path fill="url(#powerbi-gr1)" d="M27,44h10c1.105,0,2-0.895,2-2V6c0-1.105-0.895-2-2-2H27c-1.105,0-2,0.895-2,2v36 C25,43.105,25.895,44,27,44z"></path><linearGradient id="powerbi-gr2" x1="22.089" x2="26.009" y1="13.14" y2="45.672" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fed35d"></stop><stop offset=".281" stop-color="#f6c648"></stop><stop offset=".857" stop-color="#e3a513"></stop><stop offset=".989" stop-color="#de9d06"></stop></linearGradient><path fill="url(#powerbi-gr2)" d="M19,44h10c1.105,0,2-0.895,2-2V16c0-1.105-0.895-2-2-2H19c-1.105,0-2,0.895-2,2v26 C17,43.105,17.895,44,19,44z"></path><linearGradient id="powerbi-gr3" x1="9.803" x2="21.335" y1="22.781" y2="43.658" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd869"></stop><stop offset=".983" stop-color="#ffdf26"></stop></linearGradient><path fill="url(#powerbi-gr3)" d="M11,44h10c1.105,0,2-0.895,2-2V26c0-1.105-0.895-2-2-2H11c-1.105,0-2,0.895-2,2v16 C9,43.105,9.895,44,11,44z"></path></svg><span>Power BI</span></div>
         <div class="skill-item"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 48 48"><rect width="1.5" height="9" x="22.75" y="1" fill="#78909c"></rect><rect width="9" height="1.5" x="19" y="4.75" fill="#78909c"></rect><rect width="1.5" height="9" x="40.75" y="19" fill="#5c6bc0"></rect><rect width="9" height="1.5" x="37" y="22.75" fill="#5c6bc0"></rect><rect width="1.5" height="9" x="4.75" y="19" fill="#78909c"></rect><rect width="9" height="1.5" x="1" y="22.75" fill="#78909c"></rect><rect width="1.5" height="9" x="22.75" y="37" fill="#5c6bc0"></rect><rect width="9" height="1.5" x="19" y="40.75" fill="#5c6bc0"></rect><rect width="17" height="3" x="15" y="22" fill="#e8762d"></rect><rect width="3" height="17" x="22" y="15" fill="#e8762d"></rect><rect width="2" height="14" x="11" y="6" fill="#ffa000"></rect><rect width="14" height="2" x="5" y="12" fill="#ffa000"></rect><rect width="2" height="14" x="34" y="6" fill="#607d8b"></rect><rect width="14" height="2" x="28" y="12" fill="#607d8b"></rect><rect width="2" height="14" x="11" y="27" fill="#c62828"></rect><rect width="14" height="2" x="5" y="33" fill="#c62828"></rect><rect width="2" height="14" x="34" y="27" fill="#0d47a1"></rect><rect width="14" height="2" x="28" y="33" fill="#0d47a1"></rect></svg><span>Tableau</span></div>
@@ -183,29 +205,32 @@ title: Tanishk Mestry - Portfolio
     </div>
   </section>
 
-  <section id="experience" class="section">
+  <section id="timeline" class="section">
     <div class="content-wrapper">
-        <h2 class="section-title hidden">Work Experience</h2>
-        <div class="timeline-item hidden">
-            <h3>Bhoir & Patil Associates, Tax Consultants <span style="color: var(--text-muted);">(Apr 2024 - Mar 2025)</span></h3>
-            <p><strong>Accounts Assistant:</strong> Managed and entered client financial data, including balance sheets, purchase and sales records, using Tally. Prepared and analysed financial statements and maintained detailed creditor and debtor records in Excel. Ensured tax compliance by generating accurate reports through GST software.</p>
+      <h2 class="section-title hidden">Timeline</h2>
+      <div class="timeline-grid hidden">
+        <div class="timeline-column">
+          <h3>Work Experience</h3>
+          <div class="timeline-item">
+            <h4>Bhoir & Patil Associates, Tax Consultants</h4>
+            <p>Accounts Assistant (Apr 2024 - Mar 2025)</p>
+          </div>
         </div>
+        <div class="timeline-column">
+          <h3>Education</h3>
+          <div class="timeline-item">
+            <h4>SVKM's Mithibai College</h4>
+            <p>B.Sc. in Applied Statistics & Data Analytics (Expected: April 2026)</p>
+          </div>
+          <div class="timeline-item">
+            <h4>ITVEDANT</h4>
+            <p>Master in Data Science & Analytics with AI (Jan 2025)</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="education" class="section">
-    <div class="content-wrapper">
-        <h2 class="section-title hidden">Education</h2>
-        <div class="timeline-item hidden">
-            <h3>SVKM's Mithibai College <span style="color: var(--text-muted);">(Expected: April 2026)</span></h3>
-            <p>B.Sc. in Applied Statistics & Data Analytics</p>
-        </div>
-        <div class="timeline-item hidden">
-            <h3 style="margin-top: 2rem;">ITVEDANT <span style="color: var(--text-muted);">(Jan 2025)</span></h3>
-            <p>Master in Data Science & Analytics with Artificial Intelligence</p>
-        </div>
-    </div>
-  </section>
 </main>
 
 <div id="youtube-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('youtube-modal')">&times;</span><h2>Global YouTube Statistics</h2><img src="images/placeholder.png" alt="YouTube Project Screenshot"></div></div>
@@ -219,6 +244,7 @@ title: Tanishk Mestry - Portfolio
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Cursor Spotlight ---
     const spotlight = document.querySelector('.cursor-spotlight');
     if (spotlight) {
         document.addEventListener('mousemove', (e) => {
@@ -226,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Theme Toggle ---
     const toggleCheckbox = document.getElementById('checkbox');
     function setTheme(isLight) {
         document.body.classList.toggle('light-theme', isLight);
@@ -238,9 +265,10 @@ document.addEventListener('DOMContentLoaded', () => {
         setTheme(savedTheme === 'light');
     }
 
+    // --- Typing Effect ---
     const typingElement = document.getElementById('typing-text');
     if (typingElement) {
-        const textToType = "TANISHK MESTRY";
+        const textToType = "TANISHK MANOJ MESTRY";
         let i = 0;
         function typeWriter() {
             if (i < textToType.length) {
@@ -252,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeWriter, 500);
     }
 
+    // --- Scroll Animations ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -262,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
 
+    // --- Carousel Class ---
     class Carousel {
         constructor(carouselElement, data, slideGenerator) {
             if (!carouselElement) return;
@@ -321,6 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- Data and Initialization ---
     const projectData = [
         { id: 'youtube-modal', bg: 'images/placeholder.png', title: 'Global YouTube Statistics'},
         { id: 'sales-modal', bg: 'images/placeholder.png', title: 'Product Sales Analysis'},
